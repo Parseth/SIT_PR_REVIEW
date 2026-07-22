@@ -1,0 +1,1091 @@
+!! Building configuration...
+!! IOS XR Configuration 25.2.2.14I
+!! Last configuration change at Fri Dec 20 01:47:42 2024 by root
+!
+hostname CASTLE-SE-ASBR
+group isis-interfaces
+ router isis '.*'
+  interface 'TenGigE.*'
+   circuit-type level-2-only
+   bfd minimum-interval 100
+   bfd multiplier 3
+   bfd fast-detect ipv4
+   point-to-point
+   hello-password hmac-md5 encrypted 045E1A13062F4556
+   address-family ipv4 unicast
+   !
+  !
+  interface 'Loopback.*'
+   passive
+   circuit-type level-2-only
+   address-family ipv4 unicast
+   !
+  !
+  interface 'HundredGigE.*'
+   circuit-type level-2-only
+   bfd minimum-interval 100
+   bfd multiplier 3
+   point-to-point
+   address-family ipv4 unicast
+    fast-reroute per-prefix
+    fast-reroute per-prefix tiebreaker node-protecting index 100
+    fast-reroute per-prefix ti-lfa
+   !
+  !
+  interface 'Bundle-Ether.*'
+   circuit-type level-2-only
+   point-to-point
+   hello-password hmac-md5 encrypted 03014A1E0F012854
+   address-family ipv4 unicast
+   !
+  !
+ !
+end-group
+group ISIS-INTERFACE-3
+ router isis '.*'
+  address-family ipv4 unicast
+   metric 10
+  !
+  address-family ipv6 unicast
+   metric 10
+  !
+  interface 'TenGigE.*'
+   circuit-type level-2-only
+   bfd minimum-interval 50
+   bfd multiplier 3
+   bfd fast-detect ipv4
+   bfd fast-detect ipv6
+   point-to-point
+   csnp-interval 65535
+   hello-padding sometimes
+   hello-interval 1
+   hello-multiplier 5
+   address-family ipv4 unicast
+    fast-reroute per-prefix
+    fast-reroute per-prefix ti-lfa
+    metric 10
+   !
+   address-family ipv6 unicast
+    metric 10
+   !
+  !
+  interface 'FortyGigE.*'
+   circuit-type level-2-only
+   bfd minimum-interval 50
+   bfd multiplier 3
+   bfd fast-detect ipv4
+   bfd fast-detect ipv6
+   point-to-point
+   csnp-interval 65535
+   hello-padding sometimes
+   hello-interval 1
+   hello-multiplier 5
+   address-family ipv4 unicast
+    fast-reroute per-prefix
+    fast-reroute per-prefix ti-lfa
+    metric 10
+   !
+   address-family ipv6 unicast
+    metric 10
+   !
+  !
+  interface 'HundredGig.*'
+   circuit-type level-2-only
+   bfd minimum-interval 50
+   bfd multiplier 3
+   bfd fast-detect ipv4
+   bfd fast-detect ipv6
+   point-to-point
+   csnp-interval 65535
+   hello-padding sometimes
+   hello-interval 1
+   hello-multiplier 5
+   address-family ipv4 unicast
+    fast-reroute per-prefix
+    fast-reroute per-prefix ti-lfa
+    metric 10
+   !
+   address-family ipv6 unicast
+    metric 10
+   !
+  !
+  interface 'Bundle-Ether.*'
+   circuit-type level-2-only
+   bfd minimum-interval 50
+   bfd multiplier 3
+   bfd fast-detect ipv4
+   bfd fast-detect ipv6
+   point-to-point
+   csnp-interval 65535
+   hello-padding disable
+   hello-interval 1
+   hello-password hmac-md5 encrypted 00071A150754
+   hello-multiplier 5
+   address-family ipv4 unicast
+    fast-reroute per-prefix
+    fast-reroute per-prefix ti-lfa
+    metric 10
+   !
+   address-family ipv6 unicast
+    metric 10
+   !
+  !
+ !
+end-group
+clock timezone PST US/Pacific
+logging events level informational
+logging console debugging
+logging monitor debugging
+logging buffered 125000000
+logging buffered debugging
+logging 1.4.48.1 vrf default
+logging source-interface MgmtEth0/RP0/CPU0/0
+service timestamps log datetime show-timezone year
+service timestamps debug datetime show-timezone year
+logging events link-status software-interfaces
+domain name cisco.com
+domain list cisco.com
+username root
+ group root-lr
+ group cisco-support
+ secret 10 $6$exGrS0johbRv7S0.$0pKNM1HKkny/vAQZgo61wJl2hM98xKaZANNVwrRbghtR7Pyq5AJz/Jw55WT2QL1VVLRE63aVSw3wtEMIcKf9M/
+!
+username lab
+ group root-lr
+ group cisco-support
+!
+username shadow
+ group root-lr
+ group cisco-support
+ secret 10 $6$hDMyo1aDBtH1o...$3Ds0vp24pzDqZKVN5nb.Kt4RAv25vNiBA82cwMplTNq2KnU7Gt41p5AcPOTffpboYtq.zl/yS9MUEZnnfWaYN.
+!
+cdp
+vrf vrf-1
+ address-family ipv4 unicast
+  import route-target
+   1:1001
+  !
+  export route-target
+   1:1001
+  !
+ !
+ address-family ipv6 unicast
+  import route-target
+   1:1001
+  !
+  export route-target
+   1:1001
+  !
+ !
+!
+vrf te-tor-3
+ address-family ipv4 unicast
+  import route-target
+   65001:1
+  !
+  export route-target
+   65001:1
+  !
+ !
+!
+address-family ipv4 unicast
+!
+address-family ipv6 unicast
+!
+line template vty
+ timestamp disable
+ exec-timeout 0 0
+!
+line console
+ timestamp
+ exec-timeout 0 0
+!
+line default
+ timestamp disable
+ exec-timeout 0 0
+!
+vty-pool PSAT 5 10
+vty-pool script 11 99
+snmp-server ifmib ifalias long
+snmp-server ifindex persist
+snmp-server ifmib internal cache max-duration 15
+snmp-server ifmib stats cache
+snmp-server mibs cbqosmib member-stats
+snmp-server community public RO SystemOwner
+snmp-server community private RW
+snmp-server traps bfd
+snmp-server traps ethernet cfm
+snmp-server traps ethernet oam events
+snmp-server traps otn
+snmp-server traps copy-complete
+snmp-server traps snmp
+snmp-server traps snmp linkup
+snmp-server traps snmp linkdown
+snmp-server traps snmp coldstart
+snmp-server traps snmp warmstart
+snmp-server traps snmp authentication
+snmp-server traps flash removal
+snmp-server traps flash insertion
+snmp-server traps config
+snmp-server traps entity
+snmp-server traps selective-vrf-download role-change
+snmp-server traps syslog
+snmp-server traps system
+snmp-server traps bridgemib
+snmp-server traps entity-redundancy all
+snmp-server traps entity-redundancy switchover
+fpd auto-upgrade enable
+bfd
+ multipath include location 0/0/CPU0
+!
+alias cc clear counters
+alias cf cle cef drops 
+alias cn clear controller npu stats counters-all instance all location 0/0/CPU0
+alias ct clear controller npu stats traps-all instance all location 0/0/CPU0
+alias fr sh mpls traffic-eng fast-reroute database
+alias mc monitor interface Te0/0/0/8/1 BE252.1 Hu0/0/0/10 HundredGigE0/0/0/0 HundredGigE0/0/0/29
+alias sn show controller npu stats counters-all instance all location all
+alias st show controllers npu stats traps-all instance all location all | ex "0         0"
+alias te show mpls traffic-eng tunnels summary
+alias fec show controllers npu resources fec location 0/0/CPU0
+alias mac show controllers fia diagshell 0 "l2 show" location 0/0/CPU0 | i mac= | util wc -l
+alias ball show bfd all | i Sessions
+alias ecmp show controllers npu resources ecmp location 0/0/CPU0
+alias bgpall sh bgp all all process performance-statistics detail | i "Default VRFs:|Non-Default VRFs:"
+alias cfm-peer show ethernet cfm peer meps | i ">  " | utility wc -l
+alias int-down show interfaces brief | ex up | util wc -l
+alias cef-count sh cef misc  |  in "Num cef entries|protocol debug statistics"
+alias cfm-local show ethernet cfm local meps | i Up | util wc -l     
+alias mac-count show controllers fia diagshell 0 "l2 show" location 0/0/CPU0 | i mac= | util wc -l
+alias clear-lpts cle lpts pifib hardware statistics location 0/0/CPU0
+alias isis-count show isis adjacency | i Up | util wc -l
+alias exec sh logging | in "FAILED|failed|fail|FAIl|error|Error|ERROR|ERR|trace|dump|core|HARD_RESET_FIA" | ex "ACCT_ERR|envmon|smartlicserver|AAA_ERR"
+alias exec log sh logging | utility egrep "Traceback|FAIL|Fail|failed|DUMP|ERR|ERROR|Err|err|error|respawn|restart|reboot|fpd|blocked|restart|dead|traceback|Failure|HW programming|dump|Dump|NP-reset|NP|core|online_diag_rsp|PuntFabric|npu_server|NPdatalog" | ex "ACCT_ERR|envmon|smartlicserver|AAA_ERR|MEP"
+call-home
+ service active
+ contact smart-licensing
+ profile CiscoTAC-1
+  active
+  destination transport-method email disable
+  destination transport-method http
+ !
+!
+ipv4 access-list loopbacks
+ 10 permit ipv4 100.100.101.0 0.0.0.255 any
+ 20 permit ipv4 100.100.100.0 0.0.0.255 any
+ 30 permit ipv4 100.100.200.0 0.0.0.255 any
+ 31 permit ipv4 100.100.201.0 0.0.0.255 any
+ 40 permit ipv4 10.11.0.0 0.0.0.255 any
+!
+ipv4 access-list ssm-range
+ 10 permit ipv4 any any
+!
+flow exporter-map netflow_exporter
+ version v9
+  options interface-table
+  options sampler-table timeout 120
+  template data timeout 120
+ !
+ dscp 48
+ transport udp 2055
+ source Loopback0
+ destination 192.163.0.2
+!
+flow monitor-map netflow_ipv4
+ record ipv4
+ exporter netflow_exporter
+ cache entries 1000000
+ cache timeout active 15
+ cache timeout inactive 5
+ cache timeout rate-limit 10000
+!
+! NCS-5508 Specific timeout values to avoid a high CPU issue.
+flow monitor-map netflow_ipv6
+ record ipv6
+ exporter netflow_exporter
+ cache entries 1000000
+ cache timeout active 120
+ cache timeout inactive 60
+ cache timeout rate-limit 10000
+!
+! NCS-5508 Specific timeout values to avoid a high CPU issue.
+flow monitor-map netflow_mpls
+ record mpls ipv4-ipv6-fields
+ exporter netflow_exporter
+ cache entries 1000000
+ cache timeout active 120
+ cache timeout inactive 60
+ cache timeout rate-limit 10000
+!
+!sampler-map sample_rate_1k
+sampler-map sample_rate_1k
+ random 1 out-of 1000
+!
+interface Bundle-Ether50
+ description - FR-PE1
+ mtu 9614
+ load-interval 30
+!
+interface Bundle-Ether50.101
+ ipv4 address 10.52.2.1 255.255.255.0
+ encapsulation dot1q 101
+!
+interface Bundle-Ether50.102
+ description *** FR-PE1 SR-LDP interworking ***
+ encapsulation dot1q 102
+!
+interface Bundle-Ether51
+ description - FR-PE2 - ASBR Link
+ mtu 9614
+ load-interval 30
+!
+interface Bundle-Ether51.101
+ ipv4 address 10.51.1.1 255.255.255.0
+ encapsulation dot1q 101
+!
+interface Bundle-Ether252
+ mtu 9614
+ load-interval 30
+!
+interface Bundle-Ether252.1
+ ipv4 address 10.252.3.1 255.255.255.0
+ ipv6 address 10:252:3::1/64
+ load-interval 30
+ encapsulation dot1q 1
+!
+interface Bundle-Ether252.3300
+ vrf te-tor-3
+ ipv4 address 31.25.0.1 255.255.255.0
+ encapsulation dot1q 3300
+!
+interface Bundle-Ether2000
+ description towards ASR9K-DCI-PE1
+ bfd address-family ipv4 destination 10.250.2.2
+ bfd address-family ipv4 fast-detect
+ mtu 9192
+ ipv4 address 10.250.2.3 255.255.255.254
+ load-interval 30
+!
+interface Loopback0
+ ipv4 address 10.11.0.13 255.255.255.255
+!
+interface Loopback1
+ ipv4 address 254.1.1.5 255.255.255.255
+!
+interface Loopback10
+ ipv4 address 100.100.200.250 255.255.255.255
+ ipv6 address 100:100:200::250/128
+!
+interface MgmtEth0/RP0/CPU0/0
+ ipv4 address 1.4.45.208 255.255.0.0
+!
+interface TenGigE0/0/0/4/0
+ description towards ASR9K-DCI-PE1
+ mtu 9192
+ ipv4 address 10.250.2.0 255.255.255.254
+ load-interval 30
+!
+interface TenGigE0/0/0/4/1
+ bundle id 2000 mode active
+ carrier-delay up 0 down 5000000
+ load-interval 30
+!
+interface TenGigE0/0/0/4/2
+ load-interval 30
+!
+interface TenGigE0/0/0/4/3
+ load-interval 30
+!
+interface TenGigE0/0/0/8/0
+ description - PEYTO-SE
+ bundle id 252 mode active
+ lacp period short
+ load-interval 30
+!
+interface TenGigE0/0/0/8/1
+ description - PEYTO-SE
+ mtu 9614
+ ipv4 address 10.252.1.1 255.255.255.0
+ ipv6 address 10:252:1::1/64
+ load-interval 30
+!
+interface TenGigE0/0/0/8/2
+ description - PEYTO-SE
+ load-interval 30
+!
+interface TenGigE0/0/0/8/3
+ description - PEYTO-SE
+ load-interval 30
+!
+interface TenGigE0/0/0/17/0
+ description - FR-PE1 - ASBR - TenGigE0/5/0/26/0-1
+ bundle id 50 mode active
+ load-interval 30
+!
+interface TenGigE0/0/0/17/1
+ description - FR-PE1 - ASBR - TenGigE0/5/0/26/0-1
+ bundle id 50 mode active
+ load-interval 30
+!
+interface TenGigE0/0/0/17/2
+ description - FR-PE1 - 0/5/0/26/0-3
+ ipv4 address 10.52.11.1 255.255.255.0
+ shutdown
+ load-interval 30
+!
+interface TenGigE0/0/0/17/3
+ description - FR-PE1 - 0/5/0/26/0-3
+ load-interval 30
+!
+interface TenGigE0/0/0/17/3.1
+ description ***shut down to avoid unresolved cef entries in AS 65000***
+ vrf vrf-1
+ ipv4 address 101.250.1.1 255.255.255.0
+ ipv6 address 101:250:1::1/64
+ encapsulation dot1q 1
+!
+interface TenGigE0/0/0/23/0
+ load-interval 30
+!
+interface TenGigE0/0/0/23/1
+ load-interval 30
+!
+interface TenGigE0/0/0/23/2
+ load-interval 30
+!
+interface TenGigE0/0/0/23/3
+ load-interval 30
+!
+interface TenGigE0/0/0/27/0
+ description - TURIN-SPINE-LEAF-DC4 - 0/0/1/3/0-3
+ load-interval 30
+!
+interface TenGigE0/0/0/27/1
+ description - TURIN-SPINE-LEAF-DC4 - 0/0/1/3/0-3
+ load-interval 30
+!
+interface TenGigE0/0/0/27/2
+ description - TURIN-SPINE-LEAF-DC4 - 0/0/1/3/0-3
+ load-interval 30
+!
+interface TenGigE0/0/0/27/3
+ description - TURIN-SPINE-LEAF-DC4 - 0/0/1/3/0-3
+ load-interval 30
+!
+controller Optics0/0/0/4
+ breakout 4x10
+!
+controller Optics0/0/0/8
+ breakout 4x10
+!
+controller Optics0/0/0/17
+ breakout 4x10
+!
+controller Optics0/0/0/23
+ breakout 4x10
+!
+controller Optics0/0/0/27
+ breakout 4x10
+!
+interface HundredGigE0/0/0/0
+ description - FR-PE2 - ASBR - HundredGigE0/0/0/0
+ mtu 9614
+ ipv4 address 10.51.2.1 255.255.255.0
+ ipv6 address 10:51:2::1/64
+ load-interval 30
+!
+interface HundredGigE0/0/0/1
+ load-interval 30
+!
+interface HundredGigE0/0/0/2
+ load-interval 30
+!
+interface HundredGigE0/0/0/3
+ load-interval 30
+!
+interface HundredGigE0/0/0/5
+ load-interval 30
+!
+interface HundredGigE0/0/0/6
+ load-interval 30
+!
+interface HundredGigE0/0/0/7
+ load-interval 30
+!
+interface HundredGigE0/0/0/9
+ load-interval 30
+!
+interface HundredGigE0/0/0/10
+ description - TURIN-AS2-LEAF-DC4 - HundredGigE0/0/1/0
+ mtu 9614
+ ipv4 address 10.251.1.2 255.255.255.0
+ ipv6 address 10:251:1::2/64
+ priority-flow-control mode on
+ load-interval 30
+!
+interface HundredGigE0/0/0/11
+ load-interval 30
+!
+interface HundredGigE0/0/0/12
+ mtu 9192
+ load-interval 30
+!
+interface HundredGigE0/0/0/13
+ load-interval 30
+!
+interface HundredGigE0/0/0/14
+ mtu 9192
+ ipv4 address 10.11.1.203 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/15
+ load-interval 30
+!
+interface HundredGigE0/0/0/16
+ load-interval 30
+!
+interface HundredGigE0/0/0/18
+ mtu 9192
+ ipv4 address 10.11.1.201 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/19
+ load-interval 30
+!
+interface HundredGigE0/0/0/20
+ load-interval 30
+!
+interface HundredGigE0/0/0/21
+ load-interval 30
+!
+interface HundredGigE0/0/0/22
+ mtu 9192
+ ipv4 address 10.11.1.185 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/24
+ load-interval 30
+!
+interface HundredGigE0/0/0/25
+ load-interval 30
+!
+interface HundredGigE0/0/0/26
+ load-interval 30
+!
+interface HundredGigE0/0/0/28
+ description towards LEAF-4
+ mtu 9192
+ ipv4 address 10.11.1.193 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/29
+ description - FR-PE1 - HundredGigE0/5/0/1
+ mtu 9614
+ ipv4 address 10.52.1.1 255.255.255.0
+ ipv6 address 10:52:1::1/64
+ load-interval 30
+!
+interface HundredGigE0/0/0/30
+ description towards LEAF-4
+ mtu 9192
+ ipv4 address 10.11.1.191 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/31
+ mtu 9192
+ ipv4 address 10.12.1.2 255.255.255.252
+ load-interval 30
+!
+interface HundredGigE0/0/0/32
+ mtu 9192
+ ipv4 address 10.11.1.189 255.255.255.254
+ load-interval 30
+!
+interface HundredGigE0/0/0/33
+ load-interval 30
+!
+interface HundredGigE0/0/0/34
+ load-interval 30
+!
+interface HundredGigE0/0/0/35
+ description - FR-PE2 - HundredGigE0/3/0/35
+ bundle id 51 mode active
+ load-interval 30
+!
+interface preconfigure FortyGigE0/0/0/4
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/4
+ load-interval 30
+!
+interface preconfigure FortyGigE0/0/0/8
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/8
+ load-interval 30
+!
+interface preconfigure FortyGigE0/0/0/17
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/17
+ load-interval 30
+!
+interface preconfigure HundredGigE0/0/0/23
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/27
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/27
+ load-interval 30
+!
+rd-set RSVP_VPN
+  65001:1
+end-set
+!
+prefix-set loopback
+  100.100.200.0/24 le 32,
+  100.100.201.251/32,
+  100.100.201.252/32,
+  100.100.201.254/32,
+  100.100.100.0/24 le 32,
+  10.11.0.13/32
+end-set
+!
+prefix-set asbr-filter
+  100.100.100.101/32,
+  100.100.100.103/32
+end-set
+!
+prefix-set isis-4_prefix
+  52.252.0.0/16 le 32
+end-set
+!
+prefix-set drop_to_avoid_loop
+  100.100.200.0/24 le 32,
+  100.100.201.0/24 le 32
+end-set
+!
+route-policy PASS
+  pass
+  done
+end-policy
+!
+route-policy ADDPATH
+  set path-selection backup 1 install multipath-protect advertise
+end-policy
+!
+route-policy SET-INDEX($sid)
+  set label-index $sid
+end-policy
+!
+route-policy SET_NH_LO0
+  set next-hop 100.100.200.250
+  pass
+end-policy
+!
+route-policy asbr-filter
+  if destination in asbr-filter then
+    drop
+  else
+    pass
+  endif
+end-policy
+!
+route-policy bgp_lu_label
+  if destination in loopback then
+    pass
+  endif
+  if destination in isis-4_prefix then
+    pass
+  endif
+end-policy
+!
+route-policy red_connected
+  if destination in loopback then
+    pass
+  endif
+end-policy
+!
+route-policy VPN_NHOP_NHS_SELECTIVE
+  if rd in RSVP_VPN then
+    set next-hop 10.11.0.13
+  else
+    set next-hop self
+  endif
+end-policy
+!
+route-policy table_policy_avoid_loop
+  if destination in drop_to_avoid_loop then
+    drop
+  else
+    pass
+  endif
+end-policy
+!
+router static
+ address-family ipv4 unicast
+  1.1.0.0/16 1.4.0.1
+  1.3.0.0/16 1.4.0.1
+  1.4.0.0/16 1.4.0.1
+  1.5.0.0/16 1.4.0.1
+  10.251.1.1/32 HundredGigE0/0/0/10
+  172.28.98.178/32 1.4.0.1
+  223.255.254.253/32 1.4.0.1
+  223.255.254.254/32 1.4.0.1
+ !
+!
+router isis core
+ is-type level-2-only
+ net 49.1111.0000.0000.1113.00
+ log adjacency changes
+ trace mode enhanced
+ lsp-refresh-interval 65235
+ max-lsp-lifetime 65535
+ address-family ipv4 unicast
+  metric-style wide
+  mpls traffic-eng level-2-only
+  mpls traffic-eng router-id Loopback10
+  maximum-paths 32
+  spf prefix-priority critical 100
+  mpls ldp auto-config
+ !
+ address-family ipv6 unicast
+  metric-style wide
+  maximum-paths 32
+ !
+ interface Loopback0
+  passive
+  address-family ipv4 unicast
+   tag 100
+  !
+ !
+ interface Loopback10
+  passive
+  address-family ipv4 unicast
+   tag 100
+  !
+ !
+ interface HundredGigE0/0/0/0
+  circuit-type level-2-only
+  point-to-point
+  csnp-interval 65535
+  hello-padding sometimes
+  address-family ipv4 unicast
+   fast-reroute per-prefix
+   fast-reroute per-prefix ti-lfa
+   metric 10
+  !
+  address-family ipv6 unicast
+   metric 10
+  !
+ !
+ interface HundredGigE0/0/0/29
+  circuit-type level-2-only
+  point-to-point
+  csnp-interval 65535
+  hello-padding sometimes
+  address-family ipv4 unicast
+   fast-reroute per-prefix
+   fast-reroute per-prefix ti-lfa
+   metric 10
+  !
+  address-family ipv6 unicast
+   metric 10
+  !
+ !
+!
+router bgp 65001
+ nsr
+ bfd minimum-interval 300
+ bfd multiplier 3
+ bgp router-id 100.100.200.250
+ mpls activate
+  interface Bundle-Ether50
+  interface Bundle-Ether51
+  interface Bundle-Ether50.101
+  interface Bundle-Ether51.101
+  interface HundredGigE0/0/0/0
+  interface HundredGigE0/0/0/10
+  interface HundredGigE0/0/0/29
+ !
+ bgp graceful-restart
+ bgp log neighbor changes detail
+ bgp bestpath med confed
+ ibgp policy out enforce-modifications
+ address-family ipv4 unicast
+  table-policy asbr-filter
+  distance bgp 200 200 200
+  additional-paths receive
+  additional-paths send
+  maximum-paths ibgp 32
+  additional-paths selection route-policy ADDPATH
+  advertise local-labeled-route safi-unicast disable
+  network 10.11.0.13/32
+  network 100.100.200.250/32
+  allocate-label route-policy bgp_lu_label
+ !
+ address-family vpnv4 unicast
+  additional-paths receive
+  additional-paths send
+  additional-paths selection route-policy ADDPATH
+ !
+ address-family ipv6 unicast
+  bgp attribute-download
+  maximum-paths ebgp 16 selective
+  maximum-paths ibgp 16
+  additional-paths selection route-policy ADDPATH
+ !
+ address-family vpnv6 unicast
+  additional-paths receive
+  additional-paths send
+  additional-paths selection route-policy ADDPATH
+ !
+ address-family l2vpn vpls-vpws
+ !
+ address-family l2vpn evpn
+ !
+ address-family link-state link-state
+ !
+ session-group iBGP-LU
+  remote-as 65001
+  password encrypted 05080F1C2243
+ !
+ neighbor-group iBGP
+  use session-group iBGP-LU
+  address-family ipv4 unicast
+   multipath
+   route-policy PASS in
+   route-policy SET_NH_LO0 out
+   soft-reconfiguration inbound always
+  !
+  address-family ipv4 labeled-unicast
+   multipath
+   route-policy PASS in
+   route-policy PASS out
+   soft-reconfiguration inbound always
+  !
+  address-family vpnv4 unicast
+   multipath
+   route-policy PASS in
+   route-policy VPN_NHOP_NHS_SELECTIVE out
+  !
+  address-family ipv6 labeled-unicast
+   next-hop-self
+   multipath
+   route-policy PASS in
+   route-policy SET_NH_LO0 out
+   soft-reconfiguration inbound always
+  !
+  address-family vpnv6 unicast
+   route-policy PASS in
+   route-policy SET_NH_LO0 out
+  !
+  address-family l2vpn vpls-vpws
+   multipath
+   route-policy PASS in
+   route-policy SET_NH_LO0 out
+   soft-reconfiguration inbound always
+  !
+  address-family l2vpn evpn
+   multipath
+   route-policy PASS in
+   route-policy SET_NH_LO0 out
+   soft-reconfiguration inbound always
+  !
+  address-family link-state link-state
+  !
+ !
+ neighbor 10.51.1.2
+  remote-as 65000
+  bfd fast-detect strict-mode
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255
+  update-source Bundle-Ether51.101
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ neighbor 10.51.2.2
+  remote-as 65000
+  bfd fast-detect strict-mode
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ neighbor 10.52.1.2
+  remote-as 65000
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ neighbor 10.52.2.2
+  remote-as 65000
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ neighbor 10.251.1.1
+  use neighbor-group iBGP
+  address-family ipv4 labeled-unicast
+   next-hop-self
+  !
+ !
+ neighbor 100.100.100.101
+  remote-as 65000
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255 mpls
+  update-source Loopback10
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ neighbor 100.100.100.103
+  remote-as 65000
+  bfd fast-detect strict-mode
+  bfd multiplier 3
+  bfd minimum-interval 300
+  ebgp-multihop 255 mpls
+  update-source Loopback10
+  address-family ipv4 labeled-unicast
+   route-policy PASS in
+   route-policy PASS out
+  !
+ !
+ vrf vrf-1
+  rd 250:1001
+  bfd minimum-interval 300
+  bfd multiplier 3
+  default-information originate
+  address-family ipv4 unicast
+   label mode per-ce
+   maximum-paths ebgp 8
+   maximum-paths ibgp 32
+   redistribute connected
+   redistribute static
+  !
+  address-family ipv6 unicast
+   label mode per-ce
+   maximum-paths ebgp 8
+   maximum-paths ibgp 32
+   allow vpn default-originate
+   redistribute connected
+   redistribute static
+  !
+ !
+ vrf te-tor-3
+  rd 65001:1
+  address-family ipv4 unicast
+   redistribute connected
+  !
+ !
+!
+cef proactive-arp-nd enable
+mpls oam
+!
+rsvp
+ interface Bundle-Ether2000
+ !
+ interface TenGigE0/0/0/4/0
+ !
+ interface HundredGigE0/0/0/0
+ !
+ interface HundredGigE0/0/0/28
+  bandwidth percentage 100
+ !
+ interface HundredGigE0/0/0/29
+ !
+ interface HundredGigE0/0/0/30
+  bandwidth percentage 100
+ !
+!
+mpls traffic-eng
+ interface Bundle-Ether2000
+ !
+ interface TenGigE0/0/0/4/0
+ !
+ interface HundredGigE0/0/0/0
+ !
+ interface HundredGigE0/0/0/28
+  auto-tunnel backup
+  !
+ !
+ interface HundredGigE0/0/0/29
+ !
+ interface HundredGigE0/0/0/30
+  auto-tunnel backup
+  !
+ !
+!
+mpls ldp
+ log
+  neighbor
+  nsr
+  graceful-restart
+ !
+ router-id 100.100.200.250
+ session protection
+ address-family ipv4
+  discovery targeted-hello accept
+  label
+   local
+    allocate for loopbacks
+    advertise
+     explicit-null
+    !
+   !
+  !
+ !
+!
+multicast-routing
+ address-family ipv4
+  mdt source Loopback0
+  multipath
+  oom-handling
+  rate-per-route
+  interface all enable
+  accounting per-prefix
+ !
+ address-family ipv6
+  interface all enable
+ !
+!
+segment-routing
+!
+lldp
+ extended-show-width enable
+!
+router pim
+ address-family ipv4
+  ssm range ssm-range
+ !
+!
+ssh client vrf default
+ssh client source-interface MgmtEth0/RP0/CPU0/0
+ssh server logging
+ssh timeout 120
+ssh server rate-limit 600
+ssh server capability netconf-xml
+ssh server session-limit 100
+ssh server v2
+ssh server vrf default
+ssh server netconf vrf default
+telnet vrf default ipv4 server max-servers 100
+end
+
