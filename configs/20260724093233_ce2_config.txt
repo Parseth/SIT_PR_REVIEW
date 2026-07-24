@@ -1,0 +1,5366 @@
+!! File saved at 04:28:39 PDT Fri Sep 19 2025 by root
+!! IOS XR Configuration 7.2.1
+!! Last configuration change at Wed Aug 14 02:37:33 2024 by root
+!
+hostname DCI-CE2
+clock timezone PST US/Pacific
+logging monitor debugging
+logging buffered 125000000
+service timestamps log datetime show-timezone year
+service timestamps debug datetime show-timezone year
+domain name cisco.com
+username root
+ group root-lr
+ group cisco-support
+ secret 5 $1$kxKk$OJZB70uhU.9TrCH3bVGFM0
+!
+username shadow
+ group root-lr
+ group cisco-support
+ secret 10 $6$hDMyo1aDBtH1o...$3Ds0vp24pzDqZKVN5nb.Kt4RAv25vNiBA82cwMplTNq2KnU7Gt41p5AcPOTffpboYtq.zl/yS9MUEZnnfWaYN.
+!
+cdp
+line template vty
+ timestamp disable
+ exec-timeout 0 0
+!
+line console
+ timestamp
+ exec-timeout 0 0
+!
+line default
+ timestamp disable
+ exec-timeout 0 0
+!
+vty-pool default 0 99
+monitor-session TEST ethernet
+ destination interface HundredGigE0/0/0/23
+!
+fpd auto-upgrade enable
+ntp
+ max-associations 1000
+ server 223.255.254.254
+ drift aging time 0
+ broadcastdelay 1000
+ update-calendar
+ log-internal-sync
+!
+alias exec log sh logging | utility egrep "Traceback|FAIL|Fail|failed|DUMP|ERR|ERROR|Err|err|error|respawn|restart|reboot|fpd|blocked|restart|dead|traceback|Failure|HW programming|dump|Dump|NP-reset|NP|core|online_diag_rsp|PuntFabric|npu_server|NPdatalog" | ex "ACCT_ERR|envmon|smartlicserver|AAA_ERR|MEP"
+call-home
+ service active
+ contact smart-licensing
+ profile CiscoTAC-1
+  active
+  destination transport-method http
+ !
+!
+interface Bundle-Ether44
+ mac-address 0.0.2
+ load-interval 30
+!
+interface Bundle-Ether44.1
+ ipv4 address 200.1.1.2 255.255.255.252
+ encapsulation dot1q 1
+!
+interface Bundle-Ether44.2
+ ipv4 address 200.200.1.2 255.255.255.252
+ encapsulation dot1q 2
+!
+interface Bundle-Ether100
+ lacp period short
+ load-interval 30
+!
+interface Bundle-Ether100.101 l2transport
+ encapsulation dot1q 101
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.102 l2transport
+ encapsulation dot1q 102
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.103 l2transport
+ encapsulation dot1q 103
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.104 l2transport
+ encapsulation dot1q 104
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.105 l2transport
+ encapsulation dot1q 105
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.106 l2transport
+ encapsulation dot1q 106
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.107 l2transport
+ encapsulation dot1q 107
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.108 l2transport
+ encapsulation dot1q 108
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.109 l2transport
+ encapsulation dot1q 109
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether100.110 l2transport
+ encapsulation dot1q 110
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102
+ lacp period short
+ load-interval 30
+!
+interface Bundle-Ether102.1 l2transport
+ encapsulation dot1q 1
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.2 l2transport
+ encapsulation dot1q 2
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.3 l2transport
+ encapsulation dot1q 3
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.4 l2transport
+ encapsulation dot1q 4
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.5 l2transport
+ encapsulation dot1q 5
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.6 l2transport
+ encapsulation dot1q 6
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.7 l2transport
+ encapsulation dot1q 7
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.8 l2transport
+ encapsulation dot1q 8
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.9 l2transport
+ encapsulation dot1q 9
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.10 l2transport
+ encapsulation dot1q 10
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.11 l2transport
+ encapsulation dot1q 11
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.12 l2transport
+ encapsulation dot1q 12
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.13 l2transport
+ encapsulation dot1q 13
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.14 l2transport
+ encapsulation dot1q 14
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.15 l2transport
+ encapsulation dot1q 15
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.16 l2transport
+ encapsulation dot1q 16
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.17 l2transport
+ encapsulation dot1q 17
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.18 l2transport
+ encapsulation dot1q 18
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.19 l2transport
+ encapsulation dot1q 19
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.20 l2transport
+ encapsulation dot1q 20
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.21 l2transport
+ encapsulation dot1q 21
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.22 l2transport
+ encapsulation dot1q 22
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.23 l2transport
+ encapsulation dot1q 23
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.24 l2transport
+ encapsulation dot1q 24
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.25 l2transport
+ encapsulation dot1q 25
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.26 l2transport
+ encapsulation dot1q 26
+!
+interface Bundle-Ether102.27 l2transport
+ encapsulation dot1q 27
+!
+interface Bundle-Ether102.28 l2transport
+ encapsulation dot1q 28
+!
+interface Bundle-Ether102.29 l2transport
+ encapsulation dot1q 29
+!
+interface Bundle-Ether102.30 l2transport
+ encapsulation dot1q 30
+!
+interface Bundle-Ether102.31 l2transport
+ encapsulation dot1q 31
+!
+interface Bundle-Ether102.101 l2transport
+ encapsulation dot1q 101
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.102 l2transport
+ encapsulation dot1q 102
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.103 l2transport
+ encapsulation dot1q 103
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.104 l2transport
+ encapsulation dot1q 104
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.105 l2transport
+ encapsulation dot1q 105
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.106 l2transport
+ encapsulation dot1q 106
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.107 l2transport
+ encapsulation dot1q 107
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.108 l2transport
+ encapsulation dot1q 108
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.109 l2transport
+ encapsulation dot1q 109
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.110 l2transport
+ encapsulation dot1q 110
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.111 l2transport
+ encapsulation dot1q 111
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.112 l2transport
+ encapsulation dot1q 112
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.113 l2transport
+ encapsulation dot1q 113
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.114 l2transport
+ encapsulation dot1q 114
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.115 l2transport
+ encapsulation dot1q 115
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.116 l2transport
+ encapsulation dot1q 116
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.117 l2transport
+ encapsulation dot1q 117
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.118 l2transport
+ encapsulation dot1q 118
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.119 l2transport
+ encapsulation dot1q 119
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.120 l2transport
+ encapsulation dot1q 120
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.121 l2transport
+ encapsulation dot1q 121
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.122 l2transport
+ encapsulation dot1q 122
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.123 l2transport
+ encapsulation dot1q 123
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.124 l2transport
+ encapsulation dot1q 124
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.125 l2transport
+ encapsulation dot1q 125
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether102.301 l2transport
+ encapsulation dot1q 301 second-dot1q any
+!
+interface Bundle-Ether202
+ description *** EVPN VPLS SH ST ***
+ load-interval 30
+!
+interface Bundle-Ether202.301 l2transport
+ encapsulation dot1q 301 second-dot1q any
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301
+ load-interval 30
+!
+interface Bundle-Ether301.101 l2transport
+ encapsulation dot1q 101 second-dot1q any
+!
+interface Bundle-Ether301.901 l2transport
+ description ***EVPN ETREE J2***
+ encapsulation dot1q 901 second-dot1q any
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3001 l2transport
+ encapsulation dot1q 3001
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3002 l2transport
+ encapsulation dot1q 3002
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3003 l2transport
+ encapsulation dot1q 3003
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3004 l2transport
+ encapsulation dot1q 3004
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3005 l2transport
+ encapsulation dot1q 3005
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3006 l2transport
+ encapsulation dot1q 3006
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3007 l2transport
+ encapsulation dot1q 3007
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3008 l2transport
+ encapsulation dot1q 3008
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3009 l2transport
+ encapsulation dot1q 3009
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3010 l2transport
+ encapsulation dot1q 3010
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3011 l2transport
+ encapsulation dot1q 3011
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3012 l2transport
+ encapsulation dot1q 3012
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3013 l2transport
+ encapsulation dot1q 3013
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3014 l2transport
+ encapsulation dot1q 3014
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3015 l2transport
+ encapsulation dot1q 3015
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3016 l2transport
+ encapsulation dot1q 3016
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3017 l2transport
+ encapsulation dot1q 3017
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3018 l2transport
+ encapsulation dot1q 3018
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3019 l2transport
+ encapsulation dot1q 3019
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3020 l2transport
+ encapsulation dot1q 3020
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3021 l2transport
+ encapsulation dot1q 3021
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3022 l2transport
+ encapsulation dot1q 3022
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3023 l2transport
+ encapsulation dot1q 3023
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3024 l2transport
+ encapsulation dot1q 3024
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3025 l2transport
+ encapsulation dot1q 3025
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3026 l2transport
+ encapsulation dot1q 3026
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3027 l2transport
+ encapsulation dot1q 3027
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3028 l2transport
+ encapsulation dot1q 3028
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3029 l2transport
+ encapsulation dot1q 3029
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3030 l2transport
+ encapsulation dot1q 3030
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3031 l2transport
+ encapsulation dot1q 3031
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3032 l2transport
+ encapsulation dot1q 3032
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3033 l2transport
+ encapsulation dot1q 3033
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3034 l2transport
+ encapsulation dot1q 3034
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3035 l2transport
+ encapsulation dot1q 3035
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3036 l2transport
+ encapsulation dot1q 3036
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3037 l2transport
+ encapsulation dot1q 3037
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3038 l2transport
+ encapsulation dot1q 3038
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3039 l2transport
+ encapsulation dot1q 3039
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3040 l2transport
+ encapsulation dot1q 3040
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3041 l2transport
+ encapsulation dot1q 3041
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3042 l2transport
+ encapsulation dot1q 3042
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3043 l2transport
+ encapsulation dot1q 3043
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3044 l2transport
+ encapsulation dot1q 3044
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3045 l2transport
+ encapsulation dot1q 3045
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3046 l2transport
+ encapsulation dot1q 3046
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3047 l2transport
+ encapsulation dot1q 3047
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3048 l2transport
+ encapsulation dot1q 3048
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3049 l2transport
+ encapsulation dot1q 3049
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3050 l2transport
+ encapsulation dot1q 3050
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3051 l2transport
+ encapsulation dot1q 3051
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3052 l2transport
+ encapsulation dot1q 3052
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3053 l2transport
+ encapsulation dot1q 3053
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3054 l2transport
+ encapsulation dot1q 3054
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3055 l2transport
+ encapsulation dot1q 3055
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3056 l2transport
+ encapsulation dot1q 3056
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3057 l2transport
+ encapsulation dot1q 3057
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3058 l2transport
+ encapsulation dot1q 3058
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3059 l2transport
+ encapsulation dot1q 3059
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3060 l2transport
+ encapsulation dot1q 3060
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3061 l2transport
+ encapsulation dot1q 3061
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3062 l2transport
+ encapsulation dot1q 3062
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3063 l2transport
+ encapsulation dot1q 3063
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3064 l2transport
+ encapsulation dot1q 3064
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3065 l2transport
+ encapsulation dot1q 3065
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3066 l2transport
+ encapsulation dot1q 3066
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3067 l2transport
+ encapsulation dot1q 3067
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3068 l2transport
+ encapsulation dot1q 3068
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3069 l2transport
+ encapsulation dot1q 3069
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3070 l2transport
+ encapsulation dot1q 3070
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3071 l2transport
+ encapsulation dot1q 3071
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3072 l2transport
+ encapsulation dot1q 3072
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3073 l2transport
+ encapsulation dot1q 3073
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3074 l2transport
+ encapsulation dot1q 3074
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3075 l2transport
+ encapsulation dot1q 3075
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3076 l2transport
+ encapsulation dot1q 3076
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3077 l2transport
+ encapsulation dot1q 3077
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3078 l2transport
+ encapsulation dot1q 3078
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3079 l2transport
+ encapsulation dot1q 3079
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3080 l2transport
+ encapsulation dot1q 3080
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3081 l2transport
+ encapsulation dot1q 3081
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3082 l2transport
+ encapsulation dot1q 3082
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3083 l2transport
+ encapsulation dot1q 3083
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3084 l2transport
+ encapsulation dot1q 3084
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3085 l2transport
+ encapsulation dot1q 3085
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3086 l2transport
+ encapsulation dot1q 3086
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3087 l2transport
+ encapsulation dot1q 3087
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3088 l2transport
+ encapsulation dot1q 3088
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3089 l2transport
+ encapsulation dot1q 3089
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3090 l2transport
+ encapsulation dot1q 3090
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3091 l2transport
+ encapsulation dot1q 3091
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3092 l2transport
+ encapsulation dot1q 3092
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3093 l2transport
+ encapsulation dot1q 3093
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3094 l2transport
+ encapsulation dot1q 3094
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3095 l2transport
+ encapsulation dot1q 3095
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3096 l2transport
+ encapsulation dot1q 3096
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3097 l2transport
+ encapsulation dot1q 3097
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3098 l2transport
+ encapsulation dot1q 3098
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3099 l2transport
+ encapsulation dot1q 3099
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3100 l2transport
+ encapsulation dot1q 3100
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3101 l2transport
+ encapsulation dot1q 3101
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3102 l2transport
+ encapsulation dot1q 3102
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3103 l2transport
+ encapsulation dot1q 3103
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3104 l2transport
+ encapsulation dot1q 3104
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3105 l2transport
+ encapsulation dot1q 3105
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3106 l2transport
+ encapsulation dot1q 3106
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3107 l2transport
+ encapsulation dot1q 3107
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3108 l2transport
+ encapsulation dot1q 3108
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3109 l2transport
+ encapsulation dot1q 3109
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3110 l2transport
+ encapsulation dot1q 3110
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3111 l2transport
+ encapsulation dot1q 3111
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3112 l2transport
+ encapsulation dot1q 3112
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3113 l2transport
+ encapsulation dot1q 3113
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3114 l2transport
+ encapsulation dot1q 3114
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3115 l2transport
+ encapsulation dot1q 3115
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3116 l2transport
+ encapsulation dot1q 3116
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3117 l2transport
+ encapsulation dot1q 3117
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3118 l2transport
+ encapsulation dot1q 3118
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3119 l2transport
+ encapsulation dot1q 3119
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3120 l2transport
+ encapsulation dot1q 3120
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3121 l2transport
+ encapsulation dot1q 3121
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3122 l2transport
+ encapsulation dot1q 3122
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3123 l2transport
+ encapsulation dot1q 3123
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3124 l2transport
+ encapsulation dot1q 3124
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3125 l2transport
+ encapsulation dot1q 3125
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3126 l2transport
+ encapsulation dot1q 3126
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3127 l2transport
+ encapsulation dot1q 3127
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3128 l2transport
+ encapsulation dot1q 3128
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3129 l2transport
+ encapsulation dot1q 3129
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3130 l2transport
+ encapsulation dot1q 3130
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3131 l2transport
+ encapsulation dot1q 3131
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3132 l2transport
+ encapsulation dot1q 3132
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3133 l2transport
+ encapsulation dot1q 3133
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3134 l2transport
+ encapsulation dot1q 3134
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3135 l2transport
+ encapsulation dot1q 3135
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3136 l2transport
+ encapsulation dot1q 3136
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3137 l2transport
+ encapsulation dot1q 3137
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3138 l2transport
+ encapsulation dot1q 3138
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3139 l2transport
+ encapsulation dot1q 3139
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3140 l2transport
+ encapsulation dot1q 3140
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3141 l2transport
+ encapsulation dot1q 3141
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3142 l2transport
+ encapsulation dot1q 3142
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3143 l2transport
+ encapsulation dot1q 3143
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3144 l2transport
+ encapsulation dot1q 3144
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3145 l2transport
+ encapsulation dot1q 3145
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3146 l2transport
+ encapsulation dot1q 3146
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3147 l2transport
+ encapsulation dot1q 3147
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3148 l2transport
+ encapsulation dot1q 3148
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3149 l2transport
+ encapsulation dot1q 3149
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3150 l2transport
+ encapsulation dot1q 3150
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3151 l2transport
+ encapsulation dot1q 3151
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3152 l2transport
+ encapsulation dot1q 3152
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3153 l2transport
+ encapsulation dot1q 3153
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3154 l2transport
+ encapsulation dot1q 3154
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3155 l2transport
+ encapsulation dot1q 3155
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3156 l2transport
+ encapsulation dot1q 3156
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3157 l2transport
+ encapsulation dot1q 3157
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3158 l2transport
+ encapsulation dot1q 3158
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3159 l2transport
+ encapsulation dot1q 3159
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3160 l2transport
+ encapsulation dot1q 3160
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3161 l2transport
+ encapsulation dot1q 3161
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3162 l2transport
+ encapsulation dot1q 3162
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3163 l2transport
+ encapsulation dot1q 3163
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3164 l2transport
+ encapsulation dot1q 3164
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3165 l2transport
+ encapsulation dot1q 3165
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3166 l2transport
+ encapsulation dot1q 3166
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3167 l2transport
+ encapsulation dot1q 3167
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3168 l2transport
+ encapsulation dot1q 3168
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3169 l2transport
+ encapsulation dot1q 3169
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3170 l2transport
+ encapsulation dot1q 3170
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3171 l2transport
+ encapsulation dot1q 3171
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3172 l2transport
+ encapsulation dot1q 3172
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3173 l2transport
+ encapsulation dot1q 3173
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3174 l2transport
+ encapsulation dot1q 3174
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3175 l2transport
+ encapsulation dot1q 3175
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3176 l2transport
+ encapsulation dot1q 3176
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3177 l2transport
+ encapsulation dot1q 3177
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3178 l2transport
+ encapsulation dot1q 3178
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3179 l2transport
+ encapsulation dot1q 3179
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3180 l2transport
+ encapsulation dot1q 3180
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3181 l2transport
+ encapsulation dot1q 3181
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3182 l2transport
+ encapsulation dot1q 3182
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3183 l2transport
+ encapsulation dot1q 3183
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3184 l2transport
+ encapsulation dot1q 3184
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3185 l2transport
+ encapsulation dot1q 3185
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3186 l2transport
+ encapsulation dot1q 3186
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3187 l2transport
+ encapsulation dot1q 3187
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3188 l2transport
+ encapsulation dot1q 3188
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3189 l2transport
+ encapsulation dot1q 3189
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3190 l2transport
+ encapsulation dot1q 3190
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3191 l2transport
+ encapsulation dot1q 3191
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3192 l2transport
+ encapsulation dot1q 3192
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3193 l2transport
+ encapsulation dot1q 3193
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3194 l2transport
+ encapsulation dot1q 3194
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3195 l2transport
+ encapsulation dot1q 3195
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3196 l2transport
+ encapsulation dot1q 3196
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3197 l2transport
+ encapsulation dot1q 3197
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3198 l2transport
+ encapsulation dot1q 3198
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3199 l2transport
+ encapsulation dot1q 3199
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3200 l2transport
+ encapsulation dot1q 3200
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3201 l2transport
+ encapsulation dot1q 3201
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3202 l2transport
+ encapsulation dot1q 3202
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3203 l2transport
+ encapsulation dot1q 3203
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3204 l2transport
+ encapsulation dot1q 3204
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3205 l2transport
+ encapsulation dot1q 3205
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3206 l2transport
+ encapsulation dot1q 3206
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3207 l2transport
+ encapsulation dot1q 3207
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3208 l2transport
+ encapsulation dot1q 3208
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3209 l2transport
+ encapsulation dot1q 3209
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3210 l2transport
+ encapsulation dot1q 3210
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3211 l2transport
+ encapsulation dot1q 3211
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3212 l2transport
+ encapsulation dot1q 3212
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3213 l2transport
+ encapsulation dot1q 3213
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3214 l2transport
+ encapsulation dot1q 3214
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3215 l2transport
+ encapsulation dot1q 3215
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3216 l2transport
+ encapsulation dot1q 3216
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3217 l2transport
+ encapsulation dot1q 3217
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3218 l2transport
+ encapsulation dot1q 3218
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3219 l2transport
+ encapsulation dot1q 3219
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3220 l2transport
+ encapsulation dot1q 3220
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3221 l2transport
+ encapsulation dot1q 3221
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3222 l2transport
+ encapsulation dot1q 3222
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3223 l2transport
+ encapsulation dot1q 3223
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3224 l2transport
+ encapsulation dot1q 3224
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3225 l2transport
+ encapsulation dot1q 3225
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3226 l2transport
+ encapsulation dot1q 3226
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3227 l2transport
+ encapsulation dot1q 3227
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3228 l2transport
+ encapsulation dot1q 3228
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3229 l2transport
+ encapsulation dot1q 3229
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3230 l2transport
+ encapsulation dot1q 3230
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3231 l2transport
+ encapsulation dot1q 3231
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3232 l2transport
+ encapsulation dot1q 3232
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3233 l2transport
+ encapsulation dot1q 3233
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3234 l2transport
+ encapsulation dot1q 3234
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3235 l2transport
+ encapsulation dot1q 3235
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3236 l2transport
+ encapsulation dot1q 3236
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3237 l2transport
+ encapsulation dot1q 3237
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3238 l2transport
+ encapsulation dot1q 3238
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3239 l2transport
+ encapsulation dot1q 3239
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether301.3240 l2transport
+ encapsulation dot1q 3240
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether302
+ load-interval 30
+!
+interface Bundle-Ether303
+ description *** PE4 J2 ***
+ load-interval 30
+!
+interface Bundle-Ether308
+ description *** PE2 SA - BE309 ***
+!
+interface Bundle-Ether308.3021 l2transport
+ encapsulation dot1q 3021
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3022 l2transport
+ encapsulation dot1q 3022
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3023 l2transport
+ encapsulation dot1q 3023
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3024 l2transport
+ encapsulation dot1q 3024
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3025 l2transport
+ encapsulation dot1q 3025
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3026 l2transport
+ encapsulation dot1q 3026
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3027 l2transport
+ encapsulation dot1q 3027
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3028 l2transport
+ encapsulation dot1q 3028
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3029 l2transport
+ encapsulation dot1q 3029
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3030 l2transport
+ encapsulation dot1q 3030
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3031 l2transport
+ encapsulation dot1q 3031
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3032 l2transport
+ encapsulation dot1q 3032
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3033 l2transport
+ encapsulation dot1q 3033
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3034 l2transport
+ encapsulation dot1q 3034
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3035 l2transport
+ encapsulation dot1q 3035
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3036 l2transport
+ encapsulation dot1q 3036
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3037 l2transport
+ encapsulation dot1q 3037
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3038 l2transport
+ encapsulation dot1q 3038
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3039 l2transport
+ encapsulation dot1q 3039
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether308.3040 l2transport
+ encapsulation dot1q 3040
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309
+ description *** PE4 SA - BE309 ***
+!
+interface Bundle-Ether309.3021 l2transport
+ encapsulation dot1q 3021
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3022 l2transport
+ encapsulation dot1q 3022
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3023 l2transport
+ encapsulation dot1q 3023
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3024 l2transport
+ encapsulation dot1q 3024
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3025 l2transport
+ encapsulation dot1q 3025
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3026 l2transport
+ encapsulation dot1q 3026
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3027 l2transport
+ encapsulation dot1q 3027
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3028 l2transport
+ encapsulation dot1q 3028
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3029 l2transport
+ encapsulation dot1q 3029
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3030 l2transport
+ encapsulation dot1q 3030
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3031 l2transport
+ encapsulation dot1q 3031
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3032 l2transport
+ encapsulation dot1q 3032
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3033 l2transport
+ encapsulation dot1q 3033
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3034 l2transport
+ encapsulation dot1q 3034
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3035 l2transport
+ encapsulation dot1q 3035
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3036 l2transport
+ encapsulation dot1q 3036
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3037 l2transport
+ encapsulation dot1q 3037
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3038 l2transport
+ encapsulation dot1q 3038
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3039 l2transport
+ encapsulation dot1q 3039
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether309.3040 l2transport
+ encapsulation dot1q 3040
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether400
+!
+interface Bundle-Ether2000
+ description *** MSTAG PE2 ***
+ load-interval 30
+!
+interface Bundle-Ether2000.1 l2transport
+ encapsulation untagged
+!
+interface Bundle-Ether2000.3061 l2transport
+ encapsulation dot1q 3061
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether2000.3062 l2transport
+ encapsulation dot1q 3062
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether2000.3063 l2transport
+ encapsulation dot1q 3063
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether3000
+ description *** MSTAG PE4 ***
+ load-interval 30
+!
+interface Bundle-Ether3000.1 l2transport
+ encapsulation untagged
+!
+interface Bundle-Ether3000.3061 l2transport
+ encapsulation dot1q 3061
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether3000.3062 l2transport
+ encapsulation dot1q 3062
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether3000.3063 l2transport
+ encapsulation dot1q 3063
+ rewrite ingress tag pop 1 symmetric
+!
+interface Bundle-Ether21321
+ l2transport
+ !
+!
+interface MgmtEth0/RP0/CPU0/0
+ ipv4 address 1.4.45.116 255.255.0.0
+!
+interface TenGigE0/0/0/3/0
+ shutdown
+!
+interface TenGigE0/0/0/3/1
+ shutdown
+!
+interface TenGigE0/0/0/3/2
+ shutdown
+!
+interface TenGigE0/0/0/3/3
+ shutdown
+!
+interface TenGigE0/0/0/8/0
+ bundle id 100 mode passive
+ load-interval 30
+!
+interface TenGigE0/0/0/8/1
+ description - PE4 - TenGigE0/3/0/8/1
+ load-interval 30
+!
+interface TenGigE0/0/0/8/1.101 l2transport
+ encapsulation dot1q 101
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.102 l2transport
+ encapsulation dot1q 102
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.103 l2transport
+ encapsulation dot1q 103
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.104 l2transport
+ encapsulation dot1q 104
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.105 l2transport
+ encapsulation dot1q 105
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.106 l2transport
+ encapsulation dot1q 106
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.107 l2transport
+ encapsulation dot1q 107
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.108 l2transport
+ encapsulation dot1q 108
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.109 l2transport
+ encapsulation dot1q 109
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.110 l2transport
+ encapsulation dot1q 110
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.111 l2transport
+ encapsulation dot1q 111
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.112 l2transport
+ encapsulation dot1q 112
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.113 l2transport
+ encapsulation dot1q 113
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.114 l2transport
+ encapsulation dot1q 114
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.115 l2transport
+ encapsulation dot1q 115
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.116 l2transport
+ encapsulation dot1q 116
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.117 l2transport
+ encapsulation dot1q 117
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.118 l2transport
+ encapsulation dot1q 118
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.119 l2transport
+ encapsulation dot1q 119
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.120 l2transport
+ encapsulation dot1q 120
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.121 l2transport
+ encapsulation dot1q 121
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.122 l2transport
+ encapsulation dot1q 122
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.123 l2transport
+ encapsulation dot1q 123
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.124 l2transport
+ encapsulation dot1q 124
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.125 l2transport
+ encapsulation dot1q 125
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3001 l2transport
+ encapsulation dot1q 3001
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3002 l2transport
+ encapsulation dot1q 3002
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3003 l2transport
+ encapsulation dot1q 3003
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3004 l2transport
+ encapsulation dot1q 3004
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3005 l2transport
+ encapsulation dot1q 3005
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3006 l2transport
+ encapsulation dot1q 3006
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3007 l2transport
+ encapsulation dot1q 3007
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3008 l2transport
+ encapsulation dot1q 3008
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3009 l2transport
+ encapsulation dot1q 3009
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3010 l2transport
+ encapsulation dot1q 3010
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3011 l2transport
+ encapsulation dot1q 3011
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3012 l2transport
+ encapsulation dot1q 3012
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3013 l2transport
+ encapsulation dot1q 3013
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3014 l2transport
+ encapsulation dot1q 3014
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3015 l2transport
+ encapsulation dot1q 3015
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3016 l2transport
+ encapsulation dot1q 3016
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3017 l2transport
+ encapsulation dot1q 3017
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3018 l2transport
+ encapsulation dot1q 3018
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3019 l2transport
+ encapsulation dot1q 3019
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/1.3020 l2transport
+ encapsulation dot1q 3020
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/8/2
+ shutdown
+!
+interface TenGigE0/0/0/8/3
+ shutdown
+!
+interface TenGigE0/0/0/10/0
+ bundle id 202 mode active
+ load-interval 30
+!
+interface TenGigE0/0/0/10/1
+ shutdown
+!
+interface TenGigE0/0/0/10/2
+ shutdown
+!
+interface TenGigE0/0/0/10/3
+ shutdown
+!
+interface TenGigE0/0/0/16/0
+ shutdown
+!
+interface TenGigE0/0/0/16/1
+ shutdown
+!
+interface TenGigE0/0/0/16/2
+ shutdown
+!
+interface TenGigE0/0/0/16/3
+ shutdown
+!
+interface TenGigE0/0/0/17/0
+ cdp
+ ipv4 address 1.1.145.1 255.255.255.252
+ load-interval 30
+!
+interface TenGigE0/0/0/17/1
+ bundle id 100 mode passive
+ load-interval 30
+!
+interface TenGigE0/0/0/17/2
+ description - PE2 - TenGigE0/5/0/17/2
+ load-interval 30
+!
+interface TenGigE0/0/0/17/2.3001 l2transport
+ encapsulation dot1q 3001
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3002 l2transport
+ encapsulation dot1q 3002
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3003 l2transport
+ encapsulation dot1q 3003
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3004 l2transport
+ encapsulation dot1q 3004
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3005 l2transport
+ encapsulation dot1q 3005
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3006 l2transport
+ encapsulation dot1q 3006
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3007 l2transport
+ encapsulation dot1q 3007
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3008 l2transport
+ encapsulation dot1q 3008
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3009 l2transport
+ encapsulation dot1q 3009
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3010 l2transport
+ encapsulation dot1q 3010
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3011 l2transport
+ encapsulation dot1q 3011
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3012 l2transport
+ encapsulation dot1q 3012
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3013 l2transport
+ encapsulation dot1q 3013
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3014 l2transport
+ encapsulation dot1q 3014
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3015 l2transport
+ encapsulation dot1q 3015
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3016 l2transport
+ encapsulation dot1q 3016
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3017 l2transport
+ encapsulation dot1q 3017
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3018 l2transport
+ encapsulation dot1q 3018
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3019 l2transport
+ encapsulation dot1q 3019
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/2.3020 l2transport
+ encapsulation dot1q 3020
+ rewrite ingress tag pop 1 symmetric
+!
+interface TenGigE0/0/0/17/3
+ shutdown
+!
+interface TenGigE0/0/0/18/0
+ bundle id 44 mode on
+!
+interface TenGigE0/0/0/18/1
+ shutdown
+!
+interface TenGigE0/0/0/18/2
+ shutdown
+!
+interface TenGigE0/0/0/18/3
+ shutdown
+!
+controller Optics0/0/0/3
+ breakout 4x10
+!
+controller Optics0/0/0/6
+ breakout 4x25
+!
+controller Optics0/0/0/8
+ breakout 4x10
+!
+controller Optics0/0/0/9
+ breakout 4x25
+!
+controller Optics0/0/0/10
+ breakout 4x10
+!
+controller Optics0/0/0/16
+ breakout 4x10
+!
+controller Optics0/0/0/17
+ breakout 4x10
+!
+controller Optics0/0/0/18
+ breakout 4x10
+!
+controller Optics0/0/0/19
+ breakout 4x25
+!
+interface HundredGigE0/0/0/0
+ load-interval 30
+!
+interface HundredGigE0/0/0/1
+ description T1-791-dhcp-HundredGigE0/0/1/3
+!
+interface HundredGigE0/0/0/2
+ load-interval 30
+!
+interface HundredGigE0/0/0/4
+ description *** PE1 ***
+ load-interval 30
+!
+interface HundredGigE0/0/0/5
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/6/0
+ bundle id 301 mode passive
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/6/1
+ bundle id 302 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/6/2
+ bundle id 308 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/6/3
+ shutdown
+!
+interface HundredGigE0/0/0/7
+ description *** ST-SE ***
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/9/0
+ bundle id 301 mode passive
+!
+interface TwentyFiveGigE0/0/0/9/1
+ bundle id 302 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/9/2
+ bundle id 102 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/9/3
+ bundle id 309 mode active
+ load-interval 30
+!
+interface HundredGigE0/0/0/11
+ description *** ST-SE ***
+ load-interval 30
+!
+interface FortyGigE0/0/0/12
+ description *** ST-SE ***
+ load-interval 30
+!
+interface HundredGigE0/0/0/13
+ description *** SPARE to PE2 ***
+ bundle id 2000 mode active
+ load-interval 30
+!
+interface HundredGigE0/0/0/14
+ load-interval 30
+!
+interface HundredGigE0/0/0/15
+ bundle id 400 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/19/0
+ bundle id 303 mode active
+ load-interval 30
+!
+interface TwentyFiveGigE0/0/0/19/1
+ shutdown
+!
+interface TwentyFiveGigE0/0/0/19/2
+ shutdown
+!
+interface TwentyFiveGigE0/0/0/19/3
+ shutdown
+!
+interface HundredGigE0/0/0/20
+ description *** SPARE to PE4 ***
+ bundle id 3000 mode active
+ load-interval 30
+!
+interface HundredGigE0/0/0/21
+ bundle id 21321 mode active
+!
+interface HundredGigE0/0/0/22
+ description Ixia-4/5
+ l2transport
+ !
+!
+interface HundredGigE0/0/0/23
+ description *** Ixia 1/1 ***
+ negotiation auto
+ load-interval 30
+!
+interface HundredGigE0/0/0/23.51 l2transport
+ encapsulation dot1q 51
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.52 l2transport
+ encapsulation dot1q 52
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.53 l2transport
+ encapsulation dot1q 53
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.54 l2transport
+ encapsulation dot1q 54
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.55 l2transport
+ encapsulation dot1q 55
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.56 l2transport
+ encapsulation dot1q 56
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.57 l2transport
+ encapsulation dot1q 57
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.58 l2transport
+ encapsulation dot1q 58
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.59 l2transport
+ encapsulation dot1q 59
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.60 l2transport
+ encapsulation dot1q 60
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.61 l2transport
+ encapsulation dot1q 61
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.62 l2transport
+ encapsulation dot1q 62
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.63 l2transport
+ encapsulation dot1q 63
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.64 l2transport
+ encapsulation dot1q 64
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.65 l2transport
+ encapsulation dot1q 65
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.66 l2transport
+ encapsulation dot1q 66
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.67 l2transport
+ encapsulation dot1q 67
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.68 l2transport
+ encapsulation dot1q 68
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.69 l2transport
+ encapsulation dot1q 69
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.70 l2transport
+ encapsulation dot1q 70
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.71 l2transport
+ encapsulation dot1q 71
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.72 l2transport
+ encapsulation dot1q 72
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.73 l2transport
+ encapsulation dot1q 73
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.74 l2transport
+ encapsulation dot1q 74
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.75 l2transport
+ encapsulation dot1q 75
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.76 l2transport
+ encapsulation dot1q 76
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.77 l2transport
+ encapsulation dot1q 77
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.78 l2transport
+ encapsulation dot1q 78
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.79 l2transport
+ encapsulation dot1q 79
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.80 l2transport
+ encapsulation dot1q 80
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.81 l2transport
+ encapsulation dot1q 81
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.82 l2transport
+ encapsulation dot1q 82
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.83 l2transport
+ encapsulation dot1q 83
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.84 l2transport
+ encapsulation dot1q 84
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.85 l2transport
+ encapsulation dot1q 85
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.86 l2transport
+ encapsulation dot1q 86
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.87 l2transport
+ encapsulation dot1q 87
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.88 l2transport
+ encapsulation dot1q 88
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.89 l2transport
+ encapsulation dot1q 89
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.90 l2transport
+ encapsulation dot1q 90
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.91 l2transport
+ encapsulation dot1q 91
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.92 l2transport
+ encapsulation dot1q 92
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.93 l2transport
+ encapsulation dot1q 93
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.94 l2transport
+ encapsulation dot1q 94
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.95 l2transport
+ encapsulation dot1q 95
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.96 l2transport
+ encapsulation dot1q 96
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.97 l2transport
+ encapsulation dot1q 97
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.98 l2transport
+ encapsulation dot1q 98
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.99 l2transport
+ encapsulation dot1q 99
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.100 l2transport
+ encapsulation dot1q 100
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.101 l2transport
+ encapsulation dot1q 101 second-dot1q any
+!
+interface HundredGigE0/0/0/23.201 l2transport
+ encapsulation dot1q 201
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.202 l2transport
+ encapsulation dot1q 202
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.203 l2transport
+ encapsulation dot1q 203
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.204 l2transport
+ encapsulation dot1q 204
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.205 l2transport
+ encapsulation dot1q 205
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.206 l2transport
+ encapsulation dot1q 206
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.207 l2transport
+ encapsulation dot1q 207
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.208 l2transport
+ encapsulation dot1q 208
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.209 l2transport
+ encapsulation dot1q 209
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.210 l2transport
+ encapsulation dot1q 210
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.211 l2transport
+ encapsulation dot1q 211
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.212 l2transport
+ encapsulation dot1q 212
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.213 l2transport
+ encapsulation dot1q 213
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.214 l2transport
+ encapsulation dot1q 214
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.215 l2transport
+ encapsulation dot1q 215
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.216 l2transport
+ encapsulation dot1q 216
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.217 l2transport
+ encapsulation dot1q 217
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.218 l2transport
+ encapsulation dot1q 218
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.219 l2transport
+ encapsulation dot1q 219
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.220 l2transport
+ encapsulation dot1q 220
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.221 l2transport
+ encapsulation dot1q 221
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.222 l2transport
+ encapsulation dot1q 222
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.223 l2transport
+ encapsulation dot1q 223
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.224 l2transport
+ encapsulation dot1q 224
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.225 l2transport
+ encapsulation dot1q 225
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.301 l2transport
+ encapsulation dot1q 301 second-dot1q any
+!
+interface HundredGigE0/0/0/23.302 l2transport
+ encapsulation dot1q 302 second-dot1q any
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.901 l2transport
+ description ***EVPN ETREE J2***
+ encapsulation dot1q 901 second-dot1q any
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1001 l2transport
+ encapsulation dot1q 1001
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1002 l2transport
+ encapsulation dot1q 1002
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1003 l2transport
+ encapsulation dot1q 1003
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1004 l2transport
+ encapsulation dot1q 1004
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1005 l2transport
+ encapsulation dot1q 1005
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1006 l2transport
+ encapsulation dot1q 1006
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1007 l2transport
+ encapsulation dot1q 1007
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1008 l2transport
+ encapsulation dot1q 1008
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1009 l2transport
+ encapsulation dot1q 1009
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.1010 l2transport
+ encapsulation dot1q 1010
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2101 l2transport
+ encapsulation dot1q 2101
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2102 l2transport
+ encapsulation dot1q 2102
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2103 l2transport
+ encapsulation dot1q 2103
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2104 l2transport
+ encapsulation dot1q 2104
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2105 l2transport
+ encapsulation dot1q 2105
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2106 l2transport
+ encapsulation dot1q 2106
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2107 l2transport
+ encapsulation dot1q 2107
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2108 l2transport
+ encapsulation dot1q 2108
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2109 l2transport
+ encapsulation dot1q 2109
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2110 l2transport
+ encapsulation dot1q 2110
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2111 l2transport
+ encapsulation dot1q 2111
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2112 l2transport
+ encapsulation dot1q 2112
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2113 l2transport
+ encapsulation dot1q 2113
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2114 l2transport
+ encapsulation dot1q 2114
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2115 l2transport
+ encapsulation dot1q 2115
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2116 l2transport
+ encapsulation dot1q 2116
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2117 l2transport
+ encapsulation dot1q 2117
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2118 l2transport
+ encapsulation dot1q 2118
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2119 l2transport
+ encapsulation dot1q 2119
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2120 l2transport
+ encapsulation dot1q 2120
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2121 l2transport
+ encapsulation dot1q 2121
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2122 l2transport
+ encapsulation dot1q 2122
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2123 l2transport
+ encapsulation dot1q 2123
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2124 l2transport
+ encapsulation dot1q 2124
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2125 l2transport
+ encapsulation dot1q 2125
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2126 l2transport
+ encapsulation dot1q 2126
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2127 l2transport
+ encapsulation dot1q 2127
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2128 l2transport
+ encapsulation dot1q 2128
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2129 l2transport
+ encapsulation dot1q 2129
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2130 l2transport
+ encapsulation dot1q 2130
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2131 l2transport
+ encapsulation dot1q 2131
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2132 l2transport
+ encapsulation dot1q 2132
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2133 l2transport
+ encapsulation dot1q 2133
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2134 l2transport
+ encapsulation dot1q 2134
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2135 l2transport
+ encapsulation dot1q 2135
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2136 l2transport
+ encapsulation dot1q 2136
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2137 l2transport
+ encapsulation dot1q 2137
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2138 l2transport
+ encapsulation dot1q 2138
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2139 l2transport
+ encapsulation dot1q 2139
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2140 l2transport
+ encapsulation dot1q 2140
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2141 l2transport
+ encapsulation dot1q 2141
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2142 l2transport
+ encapsulation dot1q 2142
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2143 l2transport
+ encapsulation dot1q 2143
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2144 l2transport
+ encapsulation dot1q 2144
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2145 l2transport
+ encapsulation dot1q 2145
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2146 l2transport
+ encapsulation dot1q 2146
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2147 l2transport
+ encapsulation dot1q 2147
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2148 l2transport
+ encapsulation dot1q 2148
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2149 l2transport
+ encapsulation dot1q 2149
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2150 l2transport
+ encapsulation dot1q 2150
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2151 l2transport
+ encapsulation dot1q 2151
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2152 l2transport
+ encapsulation dot1q 2152
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2153 l2transport
+ encapsulation dot1q 2153
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2154 l2transport
+ encapsulation dot1q 2154
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2155 l2transport
+ encapsulation dot1q 2155
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2156 l2transport
+ encapsulation dot1q 2156
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2157 l2transport
+ encapsulation dot1q 2157
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2158 l2transport
+ encapsulation dot1q 2158
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2159 l2transport
+ encapsulation dot1q 2159
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2160 l2transport
+ encapsulation dot1q 2160
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2161 l2transport
+ encapsulation dot1q 2161
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2162 l2transport
+ encapsulation dot1q 2162
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2163 l2transport
+ encapsulation dot1q 2163
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2164 l2transport
+ encapsulation dot1q 2164
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2165 l2transport
+ encapsulation dot1q 2165
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2166 l2transport
+ encapsulation dot1q 2166
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2167 l2transport
+ encapsulation dot1q 2167
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2168 l2transport
+ encapsulation dot1q 2168
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2169 l2transport
+ encapsulation dot1q 2169
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2170 l2transport
+ encapsulation dot1q 2170
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2171 l2transport
+ encapsulation dot1q 2171
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2172 l2transport
+ encapsulation dot1q 2172
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2173 l2transport
+ encapsulation dot1q 2173
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2174 l2transport
+ encapsulation dot1q 2174
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2175 l2transport
+ encapsulation dot1q 2175
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2176 l2transport
+ encapsulation dot1q 2176
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2177 l2transport
+ encapsulation dot1q 2177
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2178 l2transport
+ encapsulation dot1q 2178
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2179 l2transport
+ encapsulation dot1q 2179
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2180 l2transport
+ encapsulation dot1q 2180
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2181 l2transport
+ encapsulation dot1q 2181
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2182 l2transport
+ encapsulation dot1q 2182
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2183 l2transport
+ encapsulation dot1q 2183
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2184 l2transport
+ encapsulation dot1q 2184
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2185 l2transport
+ encapsulation dot1q 2185
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2186 l2transport
+ encapsulation dot1q 2186
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2187 l2transport
+ encapsulation dot1q 2187
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2188 l2transport
+ encapsulation dot1q 2188
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2189 l2transport
+ encapsulation dot1q 2189
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2190 l2transport
+ encapsulation dot1q 2190
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2191 l2transport
+ encapsulation dot1q 2191
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2192 l2transport
+ encapsulation dot1q 2192
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2193 l2transport
+ encapsulation dot1q 2193
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2194 l2transport
+ encapsulation dot1q 2194
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2195 l2transport
+ encapsulation dot1q 2195
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2196 l2transport
+ encapsulation dot1q 2196
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2197 l2transport
+ encapsulation dot1q 2197
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2198 l2transport
+ encapsulation dot1q 2198
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2199 l2transport
+ encapsulation dot1q 2199
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2200 l2transport
+ encapsulation dot1q 2200
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2201 l2transport
+ encapsulation dot1q 2201
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2202 l2transport
+ encapsulation dot1q 2202
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2203 l2transport
+ encapsulation dot1q 2203
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2204 l2transport
+ encapsulation dot1q 2204
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2205 l2transport
+ encapsulation dot1q 2205
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2206 l2transport
+ encapsulation dot1q 2206
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2207 l2transport
+ encapsulation dot1q 2207
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2208 l2transport
+ encapsulation dot1q 2208
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2209 l2transport
+ encapsulation dot1q 2209
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2210 l2transport
+ encapsulation dot1q 2210
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2211 l2transport
+ encapsulation dot1q 2211
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2212 l2transport
+ encapsulation dot1q 2212
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2213 l2transport
+ encapsulation dot1q 2213
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2214 l2transport
+ encapsulation dot1q 2214
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2215 l2transport
+ encapsulation dot1q 2215
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2216 l2transport
+ encapsulation dot1q 2216
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2217 l2transport
+ encapsulation dot1q 2217
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2218 l2transport
+ encapsulation dot1q 2218
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2219 l2transport
+ encapsulation dot1q 2219
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2220 l2transport
+ encapsulation dot1q 2220
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2221 l2transport
+ encapsulation dot1q 2221
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2222 l2transport
+ encapsulation dot1q 2222
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2223 l2transport
+ encapsulation dot1q 2223
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2224 l2transport
+ encapsulation dot1q 2224
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2225 l2transport
+ encapsulation dot1q 2225
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2226 l2transport
+ encapsulation dot1q 2226
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2227 l2transport
+ encapsulation dot1q 2227
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2228 l2transport
+ encapsulation dot1q 2228
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2229 l2transport
+ encapsulation dot1q 2229
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2230 l2transport
+ encapsulation dot1q 2230
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2231 l2transport
+ encapsulation dot1q 2231
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2232 l2transport
+ encapsulation dot1q 2232
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2233 l2transport
+ encapsulation dot1q 2233
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2234 l2transport
+ encapsulation dot1q 2234
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2235 l2transport
+ encapsulation dot1q 2235
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2236 l2transport
+ encapsulation dot1q 2236
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2237 l2transport
+ encapsulation dot1q 2237
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2238 l2transport
+ encapsulation dot1q 2238
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2239 l2transport
+ encapsulation dot1q 2239
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2240 l2transport
+ encapsulation dot1q 2240
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2241 l2transport
+ encapsulation dot1q 2241
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2242 l2transport
+ encapsulation dot1q 2242
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2243 l2transport
+ encapsulation dot1q 2243
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2244 l2transport
+ encapsulation dot1q 2244
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2245 l2transport
+ encapsulation dot1q 2245
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2246 l2transport
+ encapsulation dot1q 2246
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2247 l2transport
+ encapsulation dot1q 2247
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2248 l2transport
+ encapsulation dot1q 2248
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2249 l2transport
+ encapsulation dot1q 2249
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2250 l2transport
+ encapsulation dot1q 2250
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2251 l2transport
+ encapsulation dot1q 2251
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2252 l2transport
+ encapsulation dot1q 2252
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2253 l2transport
+ encapsulation dot1q 2253
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2254 l2transport
+ encapsulation dot1q 2254
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2255 l2transport
+ encapsulation dot1q 2255
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2256 l2transport
+ encapsulation dot1q 2256
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2257 l2transport
+ encapsulation dot1q 2257
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2258 l2transport
+ encapsulation dot1q 2258
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2259 l2transport
+ encapsulation dot1q 2259
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2260 l2transport
+ encapsulation dot1q 2260
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2261 l2transport
+ encapsulation dot1q 2261
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2262 l2transport
+ encapsulation dot1q 2262
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2263 l2transport
+ encapsulation dot1q 2263
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2264 l2transport
+ encapsulation dot1q 2264
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2265 l2transport
+ encapsulation dot1q 2265
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2266 l2transport
+ encapsulation dot1q 2266
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2267 l2transport
+ encapsulation dot1q 2267
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2268 l2transport
+ encapsulation dot1q 2268
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2269 l2transport
+ encapsulation dot1q 2269
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2270 l2transport
+ encapsulation dot1q 2270
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2271 l2transport
+ encapsulation dot1q 2271
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2272 l2transport
+ encapsulation dot1q 2272
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2273 l2transport
+ encapsulation dot1q 2273
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2274 l2transport
+ encapsulation dot1q 2274
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2275 l2transport
+ encapsulation dot1q 2275
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2276 l2transport
+ encapsulation dot1q 2276
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2277 l2transport
+ encapsulation dot1q 2277
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2278 l2transport
+ encapsulation dot1q 2278
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2279 l2transport
+ encapsulation dot1q 2279
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2280 l2transport
+ encapsulation dot1q 2280
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2281 l2transport
+ encapsulation dot1q 2281
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2282 l2transport
+ encapsulation dot1q 2282
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2283 l2transport
+ encapsulation dot1q 2283
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2284 l2transport
+ encapsulation dot1q 2284
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2285 l2transport
+ encapsulation dot1q 2285
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2286 l2transport
+ encapsulation dot1q 2286
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2287 l2transport
+ encapsulation dot1q 2287
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2288 l2transport
+ encapsulation dot1q 2288
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2289 l2transport
+ encapsulation dot1q 2289
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2290 l2transport
+ encapsulation dot1q 2290
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2291 l2transport
+ encapsulation dot1q 2291
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2292 l2transport
+ encapsulation dot1q 2292
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2293 l2transport
+ encapsulation dot1q 2293
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2294 l2transport
+ encapsulation dot1q 2294
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2295 l2transport
+ encapsulation dot1q 2295
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2296 l2transport
+ encapsulation dot1q 2296
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2297 l2transport
+ encapsulation dot1q 2297
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2298 l2transport
+ encapsulation dot1q 2298
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2299 l2transport
+ encapsulation dot1q 2299
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2300 l2transport
+ encapsulation dot1q 2300
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2301 l2transport
+ encapsulation dot1q 2301
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2302 l2transport
+ encapsulation dot1q 2302
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2303 l2transport
+ encapsulation dot1q 2303
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2304 l2transport
+ encapsulation dot1q 2304
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2305 l2transport
+ encapsulation dot1q 2305
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2306 l2transport
+ encapsulation dot1q 2306
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2307 l2transport
+ encapsulation dot1q 2307
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2308 l2transport
+ encapsulation dot1q 2308
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2309 l2transport
+ encapsulation dot1q 2309
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2310 l2transport
+ encapsulation dot1q 2310
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2311 l2transport
+ encapsulation dot1q 2311
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2312 l2transport
+ encapsulation dot1q 2312
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2313 l2transport
+ encapsulation dot1q 2313
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2314 l2transport
+ encapsulation dot1q 2314
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2315 l2transport
+ encapsulation dot1q 2315
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2316 l2transport
+ encapsulation dot1q 2316
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2317 l2transport
+ encapsulation dot1q 2317
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2318 l2transport
+ encapsulation dot1q 2318
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2319 l2transport
+ encapsulation dot1q 2319
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2320 l2transport
+ encapsulation dot1q 2320
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2321 l2transport
+ encapsulation dot1q 2321
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2322 l2transport
+ encapsulation dot1q 2322
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2323 l2transport
+ encapsulation dot1q 2323
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2324 l2transport
+ encapsulation dot1q 2324
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2325 l2transport
+ encapsulation dot1q 2325
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2326 l2transport
+ encapsulation dot1q 2326
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2327 l2transport
+ encapsulation dot1q 2327
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2328 l2transport
+ encapsulation dot1q 2328
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2329 l2transport
+ encapsulation dot1q 2329
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2330 l2transport
+ encapsulation dot1q 2330
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2331 l2transport
+ encapsulation dot1q 2331
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2332 l2transport
+ encapsulation dot1q 2332
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2333 l2transport
+ encapsulation dot1q 2333
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2334 l2transport
+ encapsulation dot1q 2334
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2335 l2transport
+ encapsulation dot1q 2335
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2336 l2transport
+ encapsulation dot1q 2336
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2337 l2transport
+ encapsulation dot1q 2337
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2338 l2transport
+ encapsulation dot1q 2338
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2339 l2transport
+ encapsulation dot1q 2339
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.2340 l2transport
+ encapsulation dot1q 2340
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3001 l2transport
+ encapsulation dot1q 3001
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3002 l2transport
+ encapsulation dot1q 3002
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3003 l2transport
+ encapsulation dot1q 3003
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3004 l2transport
+ encapsulation dot1q 3004
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3005 l2transport
+ encapsulation dot1q 3005
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3006 l2transport
+ encapsulation dot1q 3006
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3007 l2transport
+ encapsulation dot1q 3007
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3008 l2transport
+ encapsulation dot1q 3008
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3009 l2transport
+ encapsulation dot1q 3009
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3010 l2transport
+ encapsulation dot1q 3010
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3011 l2transport
+ encapsulation dot1q 3011
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3012 l2transport
+ encapsulation dot1q 3012
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3013 l2transport
+ encapsulation dot1q 3013
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3014 l2transport
+ encapsulation dot1q 3014
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3015 l2transport
+ encapsulation dot1q 3015
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3016 l2transport
+ encapsulation dot1q 3016
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3017 l2transport
+ encapsulation dot1q 3017
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3018 l2transport
+ encapsulation dot1q 3018
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3019 l2transport
+ encapsulation dot1q 3019
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3020 l2transport
+ encapsulation dot1q 3020
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3021 l2transport
+ encapsulation dot1q 3021
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3022 l2transport
+ encapsulation dot1q 3022
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3023 l2transport
+ encapsulation dot1q 3023
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3024 l2transport
+ encapsulation dot1q 3024
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3025 l2transport
+ encapsulation dot1q 3025
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3026 l2transport
+ encapsulation dot1q 3026
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3027 l2transport
+ encapsulation dot1q 3027
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3028 l2transport
+ encapsulation dot1q 3028
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3029 l2transport
+ encapsulation dot1q 3029
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3030 l2transport
+ encapsulation dot1q 3030
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3031 l2transport
+ encapsulation dot1q 3031
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3032 l2transport
+ encapsulation dot1q 3032
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3033 l2transport
+ encapsulation dot1q 3033
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3034 l2transport
+ encapsulation dot1q 3034
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3035 l2transport
+ encapsulation dot1q 3035
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3036 l2transport
+ encapsulation dot1q 3036
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3037 l2transport
+ encapsulation dot1q 3037
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3038 l2transport
+ encapsulation dot1q 3038
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3039 l2transport
+ encapsulation dot1q 3039
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3040 l2transport
+ encapsulation dot1q 3040
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3061 l2transport
+ encapsulation dot1q 3061
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3062 l2transport
+ encapsulation dot1q 3062
+ rewrite ingress tag pop 1 symmetric
+!
+interface HundredGigE0/0/0/23.3063 l2transport
+ encapsulation dot1q 3063
+ rewrite ingress tag pop 1 symmetric
+!
+interface preconfigure FortyGigE0/0/0/3
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/3
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/6
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/8
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/8
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/9
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/10
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/10
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/12
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/16
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/16
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/17
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/17
+ shutdown
+!
+interface preconfigure FortyGigE0/0/0/18
+ shutdown
+!
+interface preconfigure HundredGigE0/0/0/18
+ load-interval 30
+!
+interface preconfigure HundredGigE0/0/0/19
+ shutdown
+!
+spanning-tree mst mstag1
+ name mstag-1
+ allow-legacy-bpdu
+ instance 0
+  priority 12288
+ !
+ instance 1
+  vlan-ids 3061,3063
+ !
+ instance 2
+  vlan-ids 3062
+ !
+ interface Bundle-Ether2000
+ !
+ interface Bundle-Ether3000
+  instance 0 cost 20000
+  instance 1 cost 5000
+  instance 2 cost 20000
+ !
+!
+router static
+ address-family ipv4 unicast
+  1.1.0.0/16 1.4.0.1
+  1.2.0.0/16 1.4.0.1
+  1.3.0.0/16 1.4.0.1
+  1.4.0.0/16 1.4.0.1
+  223.255.0.0/16 1.4.0.1
+ !
+!
+l2vpn
+ xconnect group xcg1
+  p2p p1
+   interface Bundle-Ether21321
+   interface HundredGigE0/0/0/22
+  !
+ !
+ xconnect group vpls-cfm-ST
+  p2p c1
+  !
+ !
+ xconnect group mcast-pe4-j2
+  p2p 51
+   interface Bundle-Ether102.1
+   interface HundredGigE0/0/0/23.51
+  !
+  p2p 52
+   interface Bundle-Ether102.2
+   interface HundredGigE0/0/0/23.52
+  !
+  p2p 53
+   interface Bundle-Ether102.3
+   interface HundredGigE0/0/0/23.53
+  !
+  p2p 54
+   interface Bundle-Ether102.4
+   interface HundredGigE0/0/0/23.54
+  !
+  p2p 55
+   interface Bundle-Ether102.5
+   interface HundredGigE0/0/0/23.55
+  !
+  p2p 56
+   interface Bundle-Ether102.6
+   interface HundredGigE0/0/0/23.56
+  !
+  p2p 57
+   interface Bundle-Ether102.7
+   interface HundredGigE0/0/0/23.57
+  !
+  p2p 58
+   interface Bundle-Ether102.8
+   interface HundredGigE0/0/0/23.58
+  !
+  p2p 59
+   interface Bundle-Ether102.9
+   interface HundredGigE0/0/0/23.59
+  !
+  p2p 60
+   interface Bundle-Ether102.10
+   interface HundredGigE0/0/0/23.60
+  !
+  p2p 61
+   interface Bundle-Ether102.11
+   interface HundredGigE0/0/0/23.61
+  !
+  p2p 62
+   interface Bundle-Ether102.12
+   interface HundredGigE0/0/0/23.62
+  !
+  p2p 63
+   interface Bundle-Ether102.13
+   interface HundredGigE0/0/0/23.63
+  !
+  p2p 64
+   interface Bundle-Ether102.14
+   interface HundredGigE0/0/0/23.64
+  !
+  p2p 65
+   interface Bundle-Ether102.15
+   interface HundredGigE0/0/0/23.65
+  !
+  p2p 66
+   interface Bundle-Ether102.16
+   interface HundredGigE0/0/0/23.66
+  !
+  p2p 67
+   interface Bundle-Ether102.17
+   interface HundredGigE0/0/0/23.67
+  !
+  p2p 68
+   interface Bundle-Ether102.18
+   interface HundredGigE0/0/0/23.68
+  !
+  p2p 69
+   interface Bundle-Ether102.19
+   interface HundredGigE0/0/0/23.69
+  !
+  p2p 70
+   interface Bundle-Ether102.20
+   interface HundredGigE0/0/0/23.70
+  !
+  p2p 71
+   interface Bundle-Ether102.21
+   interface HundredGigE0/0/0/23.71
+  !
+  p2p 72
+   interface Bundle-Ether102.22
+   interface HundredGigE0/0/0/23.72
+  !
+  p2p 73
+   interface Bundle-Ether102.23
+   interface HundredGigE0/0/0/23.73
+  !
+  p2p 74
+   interface Bundle-Ether102.24
+   interface HundredGigE0/0/0/23.74
+  !
+  p2p 75
+   interface Bundle-Ether102.25
+   interface HundredGigE0/0/0/23.75
+  !
+  p2p 76
+   interface Bundle-Ether102.101
+   interface HundredGigE0/0/0/23.76
+  !
+  p2p 77
+   interface Bundle-Ether102.102
+   interface HundredGigE0/0/0/23.77
+  !
+  p2p 78
+   interface Bundle-Ether102.103
+   interface HundredGigE0/0/0/23.78
+  !
+  p2p 79
+   interface Bundle-Ether102.104
+   interface HundredGigE0/0/0/23.79
+  !
+  p2p 80
+   interface Bundle-Ether102.105
+   interface HundredGigE0/0/0/23.80
+  !
+  p2p 81
+   interface Bundle-Ether102.106
+   interface HundredGigE0/0/0/23.81
+  !
+  p2p 82
+   interface Bundle-Ether102.107
+   interface HundredGigE0/0/0/23.82
+  !
+  p2p 83
+   interface Bundle-Ether102.108
+   interface HundredGigE0/0/0/23.83
+  !
+  p2p 84
+   interface Bundle-Ether102.109
+   interface HundredGigE0/0/0/23.84
+  !
+  p2p 85
+   interface Bundle-Ether102.110
+   interface HundredGigE0/0/0/23.85
+  !
+  p2p 86
+   interface Bundle-Ether102.111
+   interface HundredGigE0/0/0/23.86
+  !
+  p2p 87
+   interface Bundle-Ether102.112
+   interface HundredGigE0/0/0/23.87
+  !
+  p2p 88
+   interface Bundle-Ether102.113
+   interface HundredGigE0/0/0/23.88
+  !
+  p2p 89
+   interface Bundle-Ether102.114
+   interface HundredGigE0/0/0/23.89
+  !
+  p2p 90
+   interface Bundle-Ether102.115
+   interface HundredGigE0/0/0/23.90
+  !
+  p2p 91
+   interface Bundle-Ether102.116
+   interface HundredGigE0/0/0/23.91
+  !
+  p2p 92
+   interface Bundle-Ether102.117
+   interface HundredGigE0/0/0/23.92
+  !
+  p2p 93
+   interface Bundle-Ether102.118
+   interface HundredGigE0/0/0/23.93
+  !
+  p2p 94
+   interface Bundle-Ether102.119
+   interface HundredGigE0/0/0/23.94
+  !
+  p2p 95
+   interface Bundle-Ether102.120
+   interface HundredGigE0/0/0/23.95
+  !
+  p2p 96
+   interface Bundle-Ether102.121
+   interface HundredGigE0/0/0/23.96
+  !
+  p2p 97
+   interface Bundle-Ether102.122
+   interface HundredGigE0/0/0/23.97
+  !
+  p2p 98
+   interface Bundle-Ether102.123
+   interface HundredGigE0/0/0/23.98
+  !
+  p2p 99
+   interface Bundle-Ether102.124
+   interface HundredGigE0/0/0/23.99
+  !
+  p2p 100
+   interface Bundle-Ether102.125
+   interface HundredGigE0/0/0/23.100
+  !
+  p2p 501
+   interface TenGigE0/0/0/8/1.101
+   interface HundredGigE0/0/0/23.201
+  !
+  p2p 502
+   interface TenGigE0/0/0/8/1.102
+   interface HundredGigE0/0/0/23.202
+  !
+  p2p 503
+   interface TenGigE0/0/0/8/1.103
+   interface HundredGigE0/0/0/23.203
+  !
+  p2p 504
+   interface TenGigE0/0/0/8/1.104
+   interface HundredGigE0/0/0/23.204
+  !
+  p2p 505
+   interface TenGigE0/0/0/8/1.105
+   interface HundredGigE0/0/0/23.205
+  !
+  p2p 506
+   interface TenGigE0/0/0/8/1.106
+   interface HundredGigE0/0/0/23.206
+  !
+  p2p 507
+   interface TenGigE0/0/0/8/1.107
+   interface HundredGigE0/0/0/23.207
+  !
+  p2p 508
+   interface TenGigE0/0/0/8/1.108
+   interface HundredGigE0/0/0/23.208
+  !
+  p2p 509
+   interface TenGigE0/0/0/8/1.109
+   interface HundredGigE0/0/0/23.209
+  !
+  p2p 510
+   interface TenGigE0/0/0/8/1.110
+   interface HundredGigE0/0/0/23.210
+  !
+  p2p 511
+   interface TenGigE0/0/0/8/1.111
+   interface HundredGigE0/0/0/23.211
+  !
+  p2p 512
+   interface TenGigE0/0/0/8/1.112
+   interface HundredGigE0/0/0/23.212
+  !
+  p2p 513
+   interface TenGigE0/0/0/8/1.113
+   interface HundredGigE0/0/0/23.213
+  !
+  p2p 514
+   interface TenGigE0/0/0/8/1.114
+   interface HundredGigE0/0/0/23.214
+  !
+  p2p 515
+   interface TenGigE0/0/0/8/1.115
+   interface HundredGigE0/0/0/23.215
+  !
+  p2p 516
+   interface TenGigE0/0/0/8/1.116
+   interface HundredGigE0/0/0/23.216
+  !
+  p2p 517
+   interface TenGigE0/0/0/8/1.117
+   interface HundredGigE0/0/0/23.217
+  !
+  p2p 518
+   interface TenGigE0/0/0/8/1.118
+   interface HundredGigE0/0/0/23.218
+  !
+  p2p 519
+   interface TenGigE0/0/0/8/1.119
+   interface HundredGigE0/0/0/23.219
+  !
+  p2p 520
+   interface TenGigE0/0/0/8/1.120
+   interface HundredGigE0/0/0/23.220
+  !
+  p2p 521
+   interface TenGigE0/0/0/8/1.121
+   interface HundredGigE0/0/0/23.221
+  !
+  p2p 522
+   interface TenGigE0/0/0/8/1.122
+   interface HundredGigE0/0/0/23.222
+  !
+  p2p 523
+   interface TenGigE0/0/0/8/1.123
+   interface HundredGigE0/0/0/23.223
+  !
+  p2p 524
+   interface TenGigE0/0/0/8/1.124
+   interface HundredGigE0/0/0/23.224
+  !
+  p2p 525
+   interface TenGigE0/0/0/8/1.125
+   interface HundredGigE0/0/0/23.225
+  !
+ !
+ xconnect group evpn-etree-j2
+  p2p evpn-etree-901
+   interface Bundle-Ether301.901
+   interface HundredGigE0/0/0/23.901
+  !
+ !
+ xconnect group evpn-scale-301
+  p2p 3001
+   interface Bundle-Ether301.3001
+   interface HundredGigE0/0/0/23.2101
+  !
+  p2p 3002
+   interface Bundle-Ether301.3002
+   interface HundredGigE0/0/0/23.2102
+  !
+  p2p 3003
+   interface Bundle-Ether301.3003
+   interface HundredGigE0/0/0/23.2103
+  !
+  p2p 3004
+   interface Bundle-Ether301.3004
+   interface HundredGigE0/0/0/23.2104
+  !
+  p2p 3005
+   interface Bundle-Ether301.3005
+   interface HundredGigE0/0/0/23.2105
+  !
+  p2p 3006
+   interface Bundle-Ether301.3006
+   interface HundredGigE0/0/0/23.2106
+  !
+  p2p 3007
+   interface Bundle-Ether301.3007
+   interface HundredGigE0/0/0/23.2107
+  !
+  p2p 3008
+   interface Bundle-Ether301.3008
+   interface HundredGigE0/0/0/23.2108
+  !
+  p2p 3009
+   interface Bundle-Ether301.3009
+   interface HundredGigE0/0/0/23.2109
+  !
+  p2p 3010
+   interface Bundle-Ether301.3010
+   interface HundredGigE0/0/0/23.2110
+  !
+  p2p 3011
+   interface Bundle-Ether301.3011
+   interface HundredGigE0/0/0/23.2111
+  !
+  p2p 3012
+   interface Bundle-Ether301.3012
+   interface HundredGigE0/0/0/23.2112
+  !
+  p2p 3013
+   interface Bundle-Ether301.3013
+   interface HundredGigE0/0/0/23.2113
+  !
+  p2p 3014
+   interface Bundle-Ether301.3014
+   interface HundredGigE0/0/0/23.2114
+  !
+  p2p 3015
+   interface Bundle-Ether301.3015
+   interface HundredGigE0/0/0/23.2115
+  !
+  p2p 3016
+   interface Bundle-Ether301.3016
+   interface HundredGigE0/0/0/23.2116
+  !
+  p2p 3017
+   interface Bundle-Ether301.3017
+   interface HundredGigE0/0/0/23.2117
+  !
+  p2p 3018
+   interface Bundle-Ether301.3018
+   interface HundredGigE0/0/0/23.2118
+  !
+  p2p 3019
+   interface Bundle-Ether301.3019
+   interface HundredGigE0/0/0/23.2119
+  !
+  p2p 3020
+   interface Bundle-Ether301.3020
+   interface HundredGigE0/0/0/23.2120
+  !
+  p2p 3021
+   interface Bundle-Ether301.3021
+   interface HundredGigE0/0/0/23.2121
+  !
+  p2p 3022
+   interface Bundle-Ether301.3022
+   interface HundredGigE0/0/0/23.2122
+  !
+  p2p 3023
+   interface Bundle-Ether301.3023
+   interface HundredGigE0/0/0/23.2123
+  !
+  p2p 3024
+   interface Bundle-Ether301.3024
+   interface HundredGigE0/0/0/23.2124
+  !
+  p2p 3025
+   interface Bundle-Ether301.3025
+   interface HundredGigE0/0/0/23.2125
+  !
+  p2p 3026
+   interface Bundle-Ether301.3026
+   interface HundredGigE0/0/0/23.2126
+  !
+  p2p 3027
+   interface Bundle-Ether301.3027
+   interface HundredGigE0/0/0/23.2127
+  !
+  p2p 3028
+   interface Bundle-Ether301.3028
+   interface HundredGigE0/0/0/23.2128
+  !
+  p2p 3029
+   interface Bundle-Ether301.3029
+   interface HundredGigE0/0/0/23.2129
+  !
+  p2p 3030
+   interface Bundle-Ether301.3030
+   interface HundredGigE0/0/0/23.2130
+  !
+  p2p 3031
+   interface Bundle-Ether301.3031
+   interface HundredGigE0/0/0/23.2131
+  !
+  p2p 3032
+   interface Bundle-Ether301.3032
+   interface HundredGigE0/0/0/23.2132
+  !
+  p2p 3033
+   interface Bundle-Ether301.3033
+   interface HundredGigE0/0/0/23.2133
+  !
+  p2p 3034
+   interface Bundle-Ether301.3034
+   interface HundredGigE0/0/0/23.2134
+  !
+  p2p 3035
+   interface Bundle-Ether301.3035
+   interface HundredGigE0/0/0/23.2135
+  !
+  p2p 3036
+   interface Bundle-Ether301.3036
+   interface HundredGigE0/0/0/23.2136
+  !
+  p2p 3037
+   interface Bundle-Ether301.3037
+   interface HundredGigE0/0/0/23.2137
+  !
+  p2p 3038
+   interface Bundle-Ether301.3038
+   interface HundredGigE0/0/0/23.2138
+  !
+  p2p 3039
+   interface Bundle-Ether301.3039
+   interface HundredGigE0/0/0/23.2139
+  !
+  p2p 3040
+   interface Bundle-Ether301.3040
+   interface HundredGigE0/0/0/23.2140
+  !
+  p2p 3041
+   interface Bundle-Ether301.3041
+   interface HundredGigE0/0/0/23.2141
+  !
+  p2p 3042
+   interface Bundle-Ether301.3042
+   interface HundredGigE0/0/0/23.2142
+  !
+  p2p 3043
+   interface Bundle-Ether301.3043
+   interface HundredGigE0/0/0/23.2143
+  !
+  p2p 3044
+   interface Bundle-Ether301.3044
+   interface HundredGigE0/0/0/23.2144
+  !
+  p2p 3045
+   interface Bundle-Ether301.3045
+   interface HundredGigE0/0/0/23.2145
+  !
+  p2p 3046
+   interface Bundle-Ether301.3046
+   interface HundredGigE0/0/0/23.2146
+  !
+  p2p 3047
+   interface Bundle-Ether301.3047
+   interface HundredGigE0/0/0/23.2147
+  !
+  p2p 3048
+   interface Bundle-Ether301.3048
+   interface HundredGigE0/0/0/23.2148
+  !
+  p2p 3049
+   interface Bundle-Ether301.3049
+   interface HundredGigE0/0/0/23.2149
+  !
+  p2p 3050
+   interface Bundle-Ether301.3050
+   interface HundredGigE0/0/0/23.2150
+  !
+  p2p 3051
+   interface Bundle-Ether301.3051
+   interface HundredGigE0/0/0/23.2151
+  !
+  p2p 3052
+   interface Bundle-Ether301.3052
+   interface HundredGigE0/0/0/23.2152
+  !
+  p2p 3053
+   interface Bundle-Ether301.3053
+   interface HundredGigE0/0/0/23.2153
+  !
+  p2p 3054
+   interface Bundle-Ether301.3054
+   interface HundredGigE0/0/0/23.2154
+  !
+  p2p 3055
+   interface Bundle-Ether301.3055
+   interface HundredGigE0/0/0/23.2155
+  !
+  p2p 3056
+   interface Bundle-Ether301.3056
+   interface HundredGigE0/0/0/23.2156
+  !
+  p2p 3057
+   interface Bundle-Ether301.3057
+   interface HundredGigE0/0/0/23.2157
+  !
+  p2p 3058
+   interface Bundle-Ether301.3058
+   interface HundredGigE0/0/0/23.2158
+  !
+  p2p 3059
+   interface Bundle-Ether301.3059
+   interface HundredGigE0/0/0/23.2159
+  !
+  p2p 3060
+   interface Bundle-Ether301.3060
+   interface HundredGigE0/0/0/23.2160
+  !
+  p2p 3061
+   interface Bundle-Ether301.3061
+   interface HundredGigE0/0/0/23.2161
+  !
+  p2p 3062
+   interface Bundle-Ether301.3062
+   interface HundredGigE0/0/0/23.2162
+  !
+  p2p 3063
+   interface Bundle-Ether301.3063
+   interface HundredGigE0/0/0/23.2163
+  !
+  p2p 3064
+   interface Bundle-Ether301.3064
+   interface HundredGigE0/0/0/23.2164
+  !
+  p2p 3065
+   interface Bundle-Ether301.3065
+   interface HundredGigE0/0/0/23.2165
+  !
+  p2p 3066
+   interface Bundle-Ether301.3066
+   interface HundredGigE0/0/0/23.2166
+  !
+  p2p 3067
+   interface Bundle-Ether301.3067
+   interface HundredGigE0/0/0/23.2167
+  !
+  p2p 3068
+   interface Bundle-Ether301.3068
+   interface HundredGigE0/0/0/23.2168
+  !
+  p2p 3069
+   interface Bundle-Ether301.3069
+   interface HundredGigE0/0/0/23.2169
+  !
+  p2p 3070
+   interface Bundle-Ether301.3070
+   interface HundredGigE0/0/0/23.2170
+  !
+  p2p 3071
+   interface Bundle-Ether301.3071
+   interface HundredGigE0/0/0/23.2171
+  !
+  p2p 3072
+   interface Bundle-Ether301.3072
+   interface HundredGigE0/0/0/23.2172
+  !
+  p2p 3073
+   interface Bundle-Ether301.3073
+   interface HundredGigE0/0/0/23.2173
+  !
+  p2p 3074
+   interface Bundle-Ether301.3074
+   interface HundredGigE0/0/0/23.2174
+  !
+  p2p 3075
+   interface Bundle-Ether301.3075
+   interface HundredGigE0/0/0/23.2175
+  !
+  p2p 3076
+   interface Bundle-Ether301.3076
+   interface HundredGigE0/0/0/23.2176
+  !
+  p2p 3077
+   interface Bundle-Ether301.3077
+   interface HundredGigE0/0/0/23.2177
+  !
+  p2p 3078
+   interface Bundle-Ether301.3078
+   interface HundredGigE0/0/0/23.2178
+  !
+  p2p 3079
+   interface Bundle-Ether301.3079
+   interface HundredGigE0/0/0/23.2179
+  !
+  p2p 3080
+   interface Bundle-Ether301.3080
+   interface HundredGigE0/0/0/23.2180
+  !
+  p2p 3081
+   interface Bundle-Ether301.3081
+   interface HundredGigE0/0/0/23.2181
+  !
+  p2p 3082
+   interface Bundle-Ether301.3082
+   interface HundredGigE0/0/0/23.2182
+  !
+  p2p 3083
+   interface Bundle-Ether301.3083
+   interface HundredGigE0/0/0/23.2183
+  !
+  p2p 3084
+   interface Bundle-Ether301.3084
+   interface HundredGigE0/0/0/23.2184
+  !
+  p2p 3085
+   interface Bundle-Ether301.3085
+   interface HundredGigE0/0/0/23.2185
+  !
+  p2p 3086
+   interface Bundle-Ether301.3086
+   interface HundredGigE0/0/0/23.2186
+  !
+  p2p 3087
+   interface Bundle-Ether301.3087
+   interface HundredGigE0/0/0/23.2187
+  !
+  p2p 3088
+   interface Bundle-Ether301.3088
+   interface HundredGigE0/0/0/23.2188
+  !
+  p2p 3089
+   interface Bundle-Ether301.3089
+   interface HundredGigE0/0/0/23.2189
+  !
+  p2p 3090
+   interface Bundle-Ether301.3090
+   interface HundredGigE0/0/0/23.2190
+  !
+  p2p 3091
+   interface Bundle-Ether301.3091
+   interface HundredGigE0/0/0/23.2191
+  !
+  p2p 3092
+   interface Bundle-Ether301.3092
+   interface HundredGigE0/0/0/23.2192
+  !
+  p2p 3093
+   interface Bundle-Ether301.3093
+   interface HundredGigE0/0/0/23.2193
+  !
+  p2p 3094
+   interface Bundle-Ether301.3094
+   interface HundredGigE0/0/0/23.2194
+  !
+  p2p 3095
+   interface Bundle-Ether301.3095
+   interface HundredGigE0/0/0/23.2195
+  !
+  p2p 3096
+   interface Bundle-Ether301.3096
+   interface HundredGigE0/0/0/23.2196
+  !
+  p2p 3097
+   interface Bundle-Ether301.3097
+   interface HundredGigE0/0/0/23.2197
+  !
+  p2p 3098
+   interface Bundle-Ether301.3098
+   interface HundredGigE0/0/0/23.2198
+  !
+  p2p 3099
+   interface Bundle-Ether301.3099
+   interface HundredGigE0/0/0/23.2199
+  !
+  p2p 3100
+   interface Bundle-Ether301.3100
+   interface HundredGigE0/0/0/23.2200
+  !
+  p2p 3101
+   interface Bundle-Ether301.3101
+   interface HundredGigE0/0/0/23.2201
+  !
+  p2p 3102
+   interface Bundle-Ether301.3102
+   interface HundredGigE0/0/0/23.2202
+  !
+  p2p 3103
+   interface Bundle-Ether301.3103
+   interface HundredGigE0/0/0/23.2203
+  !
+  p2p 3104
+   interface Bundle-Ether301.3104
+   interface HundredGigE0/0/0/23.2204
+  !
+  p2p 3105
+   interface Bundle-Ether301.3105
+   interface HundredGigE0/0/0/23.2205
+  !
+  p2p 3106
+   interface Bundle-Ether301.3106
+   interface HundredGigE0/0/0/23.2206
+  !
+  p2p 3107
+   interface Bundle-Ether301.3107
+   interface HundredGigE0/0/0/23.2207
+  !
+  p2p 3108
+   interface Bundle-Ether301.3108
+   interface HundredGigE0/0/0/23.2208
+  !
+  p2p 3109
+   interface Bundle-Ether301.3109
+   interface HundredGigE0/0/0/23.2209
+  !
+  p2p 3110
+   interface Bundle-Ether301.3110
+   interface HundredGigE0/0/0/23.2210
+  !
+  p2p 3111
+   interface Bundle-Ether301.3111
+   interface HundredGigE0/0/0/23.2211
+  !
+  p2p 3112
+   interface Bundle-Ether301.3112
+   interface HundredGigE0/0/0/23.2212
+  !
+  p2p 3113
+   interface Bundle-Ether301.3113
+   interface HundredGigE0/0/0/23.2213
+  !
+  p2p 3114
+   interface Bundle-Ether301.3114
+   interface HundredGigE0/0/0/23.2214
+  !
+  p2p 3115
+   interface Bundle-Ether301.3115
+   interface HundredGigE0/0/0/23.2215
+  !
+  p2p 3116
+   interface Bundle-Ether301.3116
+   interface HundredGigE0/0/0/23.2216
+  !
+  p2p 3117
+   interface Bundle-Ether301.3117
+   interface HundredGigE0/0/0/23.2217
+  !
+  p2p 3118
+   interface Bundle-Ether301.3118
+   interface HundredGigE0/0/0/23.2218
+  !
+  p2p 3119
+   interface Bundle-Ether301.3119
+   interface HundredGigE0/0/0/23.2219
+  !
+  p2p 3120
+   interface Bundle-Ether301.3120
+   interface HundredGigE0/0/0/23.2220
+  !
+  p2p 3121
+   interface Bundle-Ether301.3121
+   interface HundredGigE0/0/0/23.2221
+  !
+  p2p 3122
+   interface Bundle-Ether301.3122
+   interface HundredGigE0/0/0/23.2222
+  !
+  p2p 3123
+   interface Bundle-Ether301.3123
+   interface HundredGigE0/0/0/23.2223
+  !
+  p2p 3124
+   interface Bundle-Ether301.3124
+   interface HundredGigE0/0/0/23.2224
+  !
+  p2p 3125
+   interface Bundle-Ether301.3125
+   interface HundredGigE0/0/0/23.2225
+  !
+  p2p 3126
+   interface Bundle-Ether301.3126
+   interface HundredGigE0/0/0/23.2226
+  !
+  p2p 3127
+   interface Bundle-Ether301.3127
+   interface HundredGigE0/0/0/23.2227
+  !
+  p2p 3128
+   interface Bundle-Ether301.3128
+   interface HundredGigE0/0/0/23.2228
+  !
+  p2p 3129
+   interface Bundle-Ether301.3129
+   interface HundredGigE0/0/0/23.2229
+  !
+  p2p 3130
+   interface Bundle-Ether301.3130
+   interface HundredGigE0/0/0/23.2230
+  !
+  p2p 3131
+   interface Bundle-Ether301.3131
+   interface HundredGigE0/0/0/23.2231
+  !
+  p2p 3132
+   interface Bundle-Ether301.3132
+   interface HundredGigE0/0/0/23.2232
+  !
+  p2p 3133
+   interface Bundle-Ether301.3133
+   interface HundredGigE0/0/0/23.2233
+  !
+  p2p 3134
+   interface Bundle-Ether301.3134
+   interface HundredGigE0/0/0/23.2234
+  !
+  p2p 3135
+   interface Bundle-Ether301.3135
+   interface HundredGigE0/0/0/23.2235
+  !
+  p2p 3136
+   interface Bundle-Ether301.3136
+   interface HundredGigE0/0/0/23.2236
+  !
+  p2p 3137
+   interface Bundle-Ether301.3137
+   interface HundredGigE0/0/0/23.2237
+  !
+  p2p 3138
+   interface Bundle-Ether301.3138
+   interface HundredGigE0/0/0/23.2238
+  !
+  p2p 3139
+   interface Bundle-Ether301.3139
+   interface HundredGigE0/0/0/23.2239
+  !
+  p2p 3140
+   interface Bundle-Ether301.3140
+   interface HundredGigE0/0/0/23.2240
+  !
+  p2p 3141
+   interface Bundle-Ether301.3141
+   interface HundredGigE0/0/0/23.2241
+  !
+  p2p 3142
+   interface Bundle-Ether301.3142
+   interface HundredGigE0/0/0/23.2242
+  !
+  p2p 3143
+   interface Bundle-Ether301.3143
+   interface HundredGigE0/0/0/23.2243
+  !
+  p2p 3144
+   interface Bundle-Ether301.3144
+   interface HundredGigE0/0/0/23.2244
+  !
+  p2p 3145
+   interface Bundle-Ether301.3145
+   interface HundredGigE0/0/0/23.2245
+  !
+  p2p 3146
+   interface Bundle-Ether301.3146
+   interface HundredGigE0/0/0/23.2246
+  !
+  p2p 3147
+   interface Bundle-Ether301.3147
+   interface HundredGigE0/0/0/23.2247
+  !
+  p2p 3148
+   interface Bundle-Ether301.3148
+   interface HundredGigE0/0/0/23.2248
+  !
+  p2p 3149
+   interface Bundle-Ether301.3149
+   interface HundredGigE0/0/0/23.2249
+  !
+  p2p 3150
+   interface Bundle-Ether301.3150
+   interface HundredGigE0/0/0/23.2250
+  !
+  p2p 3151
+   interface Bundle-Ether301.3151
+   interface HundredGigE0/0/0/23.2251
+  !
+  p2p 3152
+   interface Bundle-Ether301.3152
+   interface HundredGigE0/0/0/23.2252
+  !
+  p2p 3153
+   interface Bundle-Ether301.3153
+   interface HundredGigE0/0/0/23.2253
+  !
+  p2p 3154
+   interface Bundle-Ether301.3154
+   interface HundredGigE0/0/0/23.2254
+  !
+  p2p 3155
+   interface Bundle-Ether301.3155
+   interface HundredGigE0/0/0/23.2255
+  !
+  p2p 3156
+   interface Bundle-Ether301.3156
+   interface HundredGigE0/0/0/23.2256
+  !
+  p2p 3157
+   interface Bundle-Ether301.3157
+   interface HundredGigE0/0/0/23.2257
+  !
+  p2p 3158
+   interface Bundle-Ether301.3158
+   interface HundredGigE0/0/0/23.2258
+  !
+  p2p 3159
+   interface Bundle-Ether301.3159
+   interface HundredGigE0/0/0/23.2259
+  !
+  p2p 3160
+   interface Bundle-Ether301.3160
+   interface HundredGigE0/0/0/23.2260
+  !
+  p2p 3161
+   interface Bundle-Ether301.3161
+   interface HundredGigE0/0/0/23.2261
+  !
+  p2p 3162
+   interface Bundle-Ether301.3162
+   interface HundredGigE0/0/0/23.2262
+  !
+  p2p 3163
+   interface Bundle-Ether301.3163
+   interface HundredGigE0/0/0/23.2263
+  !
+  p2p 3164
+   interface Bundle-Ether301.3164
+   interface HundredGigE0/0/0/23.2264
+  !
+  p2p 3165
+   interface Bundle-Ether301.3165
+   interface HundredGigE0/0/0/23.2265
+  !
+  p2p 3166
+   interface Bundle-Ether301.3166
+   interface HundredGigE0/0/0/23.2266
+  !
+  p2p 3167
+   interface Bundle-Ether301.3167
+   interface HundredGigE0/0/0/23.2267
+  !
+  p2p 3168
+   interface Bundle-Ether301.3168
+   interface HundredGigE0/0/0/23.2268
+  !
+  p2p 3169
+   interface Bundle-Ether301.3169
+   interface HundredGigE0/0/0/23.2269
+  !
+  p2p 3170
+   interface Bundle-Ether301.3170
+   interface HundredGigE0/0/0/23.2270
+  !
+  p2p 3171
+   interface Bundle-Ether301.3171
+   interface HundredGigE0/0/0/23.2271
+  !
+  p2p 3172
+   interface Bundle-Ether301.3172
+   interface HundredGigE0/0/0/23.2272
+  !
+  p2p 3173
+   interface Bundle-Ether301.3173
+   interface HundredGigE0/0/0/23.2273
+  !
+  p2p 3174
+   interface Bundle-Ether301.3174
+   interface HundredGigE0/0/0/23.2274
+  !
+  p2p 3175
+   interface Bundle-Ether301.3175
+   interface HundredGigE0/0/0/23.2275
+  !
+  p2p 3176
+   interface Bundle-Ether301.3176
+   interface HundredGigE0/0/0/23.2276
+  !
+  p2p 3177
+   interface Bundle-Ether301.3177
+   interface HundredGigE0/0/0/23.2277
+  !
+  p2p 3178
+   interface Bundle-Ether301.3178
+   interface HundredGigE0/0/0/23.2278
+  !
+  p2p 3179
+   interface Bundle-Ether301.3179
+   interface HundredGigE0/0/0/23.2279
+  !
+  p2p 3180
+   interface Bundle-Ether301.3180
+   interface HundredGigE0/0/0/23.2280
+  !
+  p2p 3181
+   interface Bundle-Ether301.3181
+   interface HundredGigE0/0/0/23.2281
+  !
+  p2p 3182
+   interface Bundle-Ether301.3182
+   interface HundredGigE0/0/0/23.2282
+  !
+  p2p 3183
+   interface Bundle-Ether301.3183
+   interface HundredGigE0/0/0/23.2283
+  !
+  p2p 3184
+   interface Bundle-Ether301.3184
+   interface HundredGigE0/0/0/23.2284
+  !
+  p2p 3185
+   interface Bundle-Ether301.3185
+   interface HundredGigE0/0/0/23.2285
+  !
+  p2p 3186
+   interface Bundle-Ether301.3186
+   interface HundredGigE0/0/0/23.2286
+  !
+  p2p 3187
+   interface Bundle-Ether301.3187
+   interface HundredGigE0/0/0/23.2287
+  !
+  p2p 3188
+   interface Bundle-Ether301.3188
+   interface HundredGigE0/0/0/23.2288
+  !
+  p2p 3189
+   interface Bundle-Ether301.3189
+   interface HundredGigE0/0/0/23.2289
+  !
+  p2p 3190
+   interface Bundle-Ether301.3190
+   interface HundredGigE0/0/0/23.2290
+  !
+  p2p 3191
+   interface Bundle-Ether301.3191
+   interface HundredGigE0/0/0/23.2291
+  !
+  p2p 3192
+   interface Bundle-Ether301.3192
+   interface HundredGigE0/0/0/23.2292
+  !
+  p2p 3193
+   interface Bundle-Ether301.3193
+   interface HundredGigE0/0/0/23.2293
+  !
+  p2p 3194
+   interface Bundle-Ether301.3194
+   interface HundredGigE0/0/0/23.2294
+  !
+  p2p 3195
+   interface Bundle-Ether301.3195
+   interface HundredGigE0/0/0/23.2295
+  !
+  p2p 3196
+   interface Bundle-Ether301.3196
+   interface HundredGigE0/0/0/23.2296
+  !
+  p2p 3197
+   interface Bundle-Ether301.3197
+   interface HundredGigE0/0/0/23.2297
+  !
+  p2p 3198
+   interface Bundle-Ether301.3198
+   interface HundredGigE0/0/0/23.2298
+  !
+  p2p 3199
+   interface Bundle-Ether301.3199
+   interface HundredGigE0/0/0/23.2299
+  !
+  p2p 3200
+   interface Bundle-Ether301.3200
+   interface HundredGigE0/0/0/23.2300
+  !
+  p2p 3201
+   interface Bundle-Ether301.3201
+   interface HundredGigE0/0/0/23.2301
+  !
+  p2p 3202
+   interface Bundle-Ether301.3202
+   interface HundredGigE0/0/0/23.2302
+  !
+  p2p 3203
+   interface Bundle-Ether301.3203
+   interface HundredGigE0/0/0/23.2303
+  !
+  p2p 3204
+   interface Bundle-Ether301.3204
+   interface HundredGigE0/0/0/23.2304
+  !
+  p2p 3205
+   interface Bundle-Ether301.3205
+   interface HundredGigE0/0/0/23.2305
+  !
+  p2p 3206
+   interface Bundle-Ether301.3206
+   interface HundredGigE0/0/0/23.2306
+  !
+  p2p 3207
+   interface Bundle-Ether301.3207
+   interface HundredGigE0/0/0/23.2307
+  !
+  p2p 3208
+   interface Bundle-Ether301.3208
+   interface HundredGigE0/0/0/23.2308
+  !
+  p2p 3209
+   interface Bundle-Ether301.3209
+   interface HundredGigE0/0/0/23.2309
+  !
+  p2p 3210
+   interface Bundle-Ether301.3210
+   interface HundredGigE0/0/0/23.2310
+  !
+  p2p 3211
+   interface Bundle-Ether301.3211
+   interface HundredGigE0/0/0/23.2311
+  !
+  p2p 3212
+   interface Bundle-Ether301.3212
+   interface HundredGigE0/0/0/23.2312
+  !
+  p2p 3213
+   interface Bundle-Ether301.3213
+   interface HundredGigE0/0/0/23.2313
+  !
+  p2p 3214
+   interface Bundle-Ether301.3214
+   interface HundredGigE0/0/0/23.2314
+  !
+  p2p 3215
+   interface Bundle-Ether301.3215
+   interface HundredGigE0/0/0/23.2315
+  !
+  p2p 3216
+   interface Bundle-Ether301.3216
+   interface HundredGigE0/0/0/23.2316
+  !
+  p2p 3217
+   interface Bundle-Ether301.3217
+   interface HundredGigE0/0/0/23.2317
+  !
+  p2p 3218
+   interface Bundle-Ether301.3218
+   interface HundredGigE0/0/0/23.2318
+  !
+  p2p 3219
+   interface Bundle-Ether301.3219
+   interface HundredGigE0/0/0/23.2319
+  !
+  p2p 3220
+   interface Bundle-Ether301.3220
+   interface HundredGigE0/0/0/23.2320
+  !
+  p2p 3221
+   interface Bundle-Ether301.3221
+   interface HundredGigE0/0/0/23.2321
+  !
+  p2p 3222
+   interface Bundle-Ether301.3222
+   interface HundredGigE0/0/0/23.2322
+  !
+  p2p 3223
+   interface Bundle-Ether301.3223
+   interface HundredGigE0/0/0/23.2323
+  !
+  p2p 3224
+   interface Bundle-Ether301.3224
+   interface HundredGigE0/0/0/23.2324
+  !
+  p2p 3225
+   interface Bundle-Ether301.3225
+   interface HundredGigE0/0/0/23.2325
+  !
+  p2p 3226
+   interface Bundle-Ether301.3226
+   interface HundredGigE0/0/0/23.2326
+  !
+  p2p 3227
+   interface Bundle-Ether301.3227
+   interface HundredGigE0/0/0/23.2327
+  !
+  p2p 3228
+   interface Bundle-Ether301.3228
+   interface HundredGigE0/0/0/23.2328
+  !
+  p2p 3229
+   interface Bundle-Ether301.3229
+   interface HundredGigE0/0/0/23.2329
+  !
+  p2p 3230
+   interface Bundle-Ether301.3230
+   interface HundredGigE0/0/0/23.2330
+  !
+  p2p 3231
+   interface Bundle-Ether301.3231
+   interface HundredGigE0/0/0/23.2331
+  !
+  p2p 3232
+   interface Bundle-Ether301.3232
+   interface HundredGigE0/0/0/23.2332
+  !
+  p2p 3233
+   interface Bundle-Ether301.3233
+   interface HundredGigE0/0/0/23.2333
+  !
+  p2p 3234
+   interface Bundle-Ether301.3234
+   interface HundredGigE0/0/0/23.2334
+  !
+  p2p 3235
+   interface Bundle-Ether301.3235
+   interface HundredGigE0/0/0/23.2335
+  !
+  p2p 3236
+   interface Bundle-Ether301.3236
+   interface HundredGigE0/0/0/23.2336
+  !
+  p2p 3237
+   interface Bundle-Ether301.3237
+   interface HundredGigE0/0/0/23.2337
+  !
+  p2p 3238
+   interface Bundle-Ether301.3238
+   interface HundredGigE0/0/0/23.2338
+  !
+  p2p 3239
+   interface Bundle-Ether301.3239
+   interface HundredGigE0/0/0/23.2339
+  !
+  p2p 3240
+   interface Bundle-Ether301.3240
+   interface HundredGigE0/0/0/23.2340
+  !
+ !
+ xconnect group evpn-vpls-sh-st
+  p2p 301
+   interface Bundle-Ether202.301
+   interface HundredGigE0/0/0/23.302
+  !
+ !
+ xconnect group evpn-vpls-mh-aa-j2
+  p2p 101
+   interface Bundle-Ether100.101
+   interface HundredGigE0/0/0/23.1001
+  !
+  p2p 102
+   interface Bundle-Ether100.102
+   interface HundredGigE0/0/0/23.1002
+  !
+  p2p 103
+   interface Bundle-Ether100.103
+   interface HundredGigE0/0/0/23.1003
+  !
+  p2p 104
+   interface Bundle-Ether100.104
+   interface HundredGigE0/0/0/23.1004
+  !
+  p2p 105
+   interface Bundle-Ether100.105
+   interface HundredGigE0/0/0/23.1005
+  !
+  p2p 106
+   interface Bundle-Ether100.106
+   interface HundredGigE0/0/0/23.1006
+  !
+  p2p 107
+   interface Bundle-Ether100.107
+   interface HundredGigE0/0/0/23.1007
+  !
+  p2p 108
+   interface Bundle-Ether100.108
+   interface HundredGigE0/0/0/23.1008
+  !
+  p2p 109
+   interface Bundle-Ether100.109
+   interface HundredGigE0/0/0/23.1009
+  !
+  p2p 110
+   interface Bundle-Ether100.110
+   interface HundredGigE0/0/0/23.1010
+  !
+ !
+ xconnect group evpn-vpws-mh-aa-j2
+  p2p 101
+   interface Bundle-Ether301.101
+   interface HundredGigE0/0/0/23.101
+  !
+ !
+ xconnect group evpn-vpls-sh-pe4-j2
+  p2p 301
+   interface Bundle-Ether102.301
+   interface HundredGigE0/0/0/23.301
+  !
+ !
+ bridge group mst-cntrl
+  bridge-domain mst-cntrl
+   interface Bundle-Ether2000.1
+   !
+   interface Bundle-Ether3000.1
+   !
+  !
+ !
+ bridge group mst-access
+  bridge-domain mst3061
+   interface Bundle-Ether2000.3061
+    split-horizon group
+   !
+   interface Bundle-Ether3000.3061
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3061
+   !
+  !
+  bridge-domain mst3062
+   interface Bundle-Ether2000.3062
+    split-horizon group
+   !
+   interface Bundle-Ether3000.3062
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3062
+   !
+  !
+  bridge-domain mst3063
+   interface Bundle-Ether2000.3063
+    split-horizon group
+   !
+   interface Bundle-Ether3000.3063
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3063
+   !
+  !
+ !
+ bridge group evpn-sa-pe2-pe4-j2
+  bridge-domain sa-3001
+   interface TenGigE0/0/0/8/1.3001
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3001
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3001
+   !
+  !
+  bridge-domain sa-3002
+   interface TenGigE0/0/0/8/1.3002
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3002
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3002
+   !
+  !
+  bridge-domain sa-3003
+   interface TenGigE0/0/0/8/1.3003
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3003
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3003
+   !
+  !
+  bridge-domain sa-3004
+   interface TenGigE0/0/0/8/1.3004
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3004
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3004
+   !
+  !
+  bridge-domain sa-3005
+   interface TenGigE0/0/0/8/1.3005
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3005
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3005
+   !
+  !
+  bridge-domain sa-3006
+   interface TenGigE0/0/0/8/1.3006
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3006
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3006
+   !
+  !
+  bridge-domain sa-3007
+   interface TenGigE0/0/0/8/1.3007
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3007
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3007
+   !
+  !
+  bridge-domain sa-3008
+   interface TenGigE0/0/0/8/1.3008
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3008
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3008
+   !
+  !
+  bridge-domain sa-3009
+   interface TenGigE0/0/0/8/1.3009
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3009
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3009
+   !
+  !
+  bridge-domain sa-3010
+   interface TenGigE0/0/0/8/1.3010
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3010
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3010
+   !
+  !
+  bridge-domain sa-3011
+   interface TenGigE0/0/0/8/1.3011
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3011
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3011
+   !
+  !
+  bridge-domain sa-3012
+   interface TenGigE0/0/0/8/1.3012
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3012
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3012
+   !
+  !
+  bridge-domain sa-3013
+   interface TenGigE0/0/0/8/1.3013
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3013
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3013
+   !
+  !
+  bridge-domain sa-3014
+   interface TenGigE0/0/0/8/1.3014
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3014
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3014
+   !
+  !
+  bridge-domain sa-3015
+   interface TenGigE0/0/0/8/1.3015
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3015
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3015
+   !
+  !
+  bridge-domain sa-3016
+   interface TenGigE0/0/0/8/1.3016
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3016
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3016
+   !
+  !
+  bridge-domain sa-3017
+   interface TenGigE0/0/0/8/1.3017
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3017
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3017
+   !
+  !
+  bridge-domain sa-3018
+   interface TenGigE0/0/0/8/1.3018
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3018
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3018
+   !
+  !
+  bridge-domain sa-3019
+   interface TenGigE0/0/0/8/1.3019
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3019
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3019
+   !
+  !
+  bridge-domain sa-3020
+   interface TenGigE0/0/0/8/1.3020
+    split-horizon group
+   !
+   interface TenGigE0/0/0/17/2.3020
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3020
+   !
+  !
+  bridge-domain sa-3021
+   interface Bundle-Ether308.3021
+    split-horizon group
+   !
+   interface Bundle-Ether309.3021
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3021
+   !
+  !
+  bridge-domain sa-3022
+   interface Bundle-Ether308.3022
+    split-horizon group
+   !
+   interface Bundle-Ether309.3022
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3022
+   !
+  !
+  bridge-domain sa-3023
+   interface Bundle-Ether308.3023
+    split-horizon group
+   !
+   interface Bundle-Ether309.3023
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3023
+   !
+  !
+  bridge-domain sa-3024
+   interface Bundle-Ether308.3024
+    split-horizon group
+   !
+   interface Bundle-Ether309.3024
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3024
+   !
+  !
+  bridge-domain sa-3025
+   interface Bundle-Ether308.3025
+    split-horizon group
+   !
+   interface Bundle-Ether309.3025
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3025
+   !
+  !
+  bridge-domain sa-3026
+   interface Bundle-Ether308.3026
+    split-horizon group
+   !
+   interface Bundle-Ether309.3026
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3026
+   !
+  !
+  bridge-domain sa-3027
+   interface Bundle-Ether308.3027
+    split-horizon group
+   !
+   interface Bundle-Ether309.3027
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3027
+   !
+  !
+  bridge-domain sa-3028
+   interface Bundle-Ether308.3028
+    split-horizon group
+   !
+   interface Bundle-Ether309.3028
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3028
+   !
+  !
+  bridge-domain sa-3029
+   interface Bundle-Ether308.3029
+    split-horizon group
+   !
+   interface Bundle-Ether309.3029
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3029
+   !
+  !
+  bridge-domain sa-3030
+   interface Bundle-Ether308.3030
+    split-horizon group
+   !
+   interface Bundle-Ether309.3030
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3030
+   !
+  !
+  bridge-domain sa-3031
+   interface Bundle-Ether308.3031
+    split-horizon group
+   !
+   interface Bundle-Ether309.3031
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3031
+   !
+  !
+  bridge-domain sa-3032
+   interface Bundle-Ether308.3032
+    split-horizon group
+   !
+   interface Bundle-Ether309.3032
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3032
+   !
+  !
+  bridge-domain sa-3033
+   interface Bundle-Ether308.3033
+    split-horizon group
+   !
+   interface Bundle-Ether309.3033
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3033
+   !
+  !
+  bridge-domain sa-3034
+   interface Bundle-Ether308.3034
+    split-horizon group
+   !
+   interface Bundle-Ether309.3034
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3034
+   !
+  !
+  bridge-domain sa-3035
+   interface Bundle-Ether308.3035
+    split-horizon group
+   !
+   interface Bundle-Ether309.3035
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3035
+   !
+  !
+  bridge-domain sa-3036
+   interface Bundle-Ether308.3036
+    split-horizon group
+   !
+   interface Bundle-Ether309.3036
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3036
+   !
+  !
+  bridge-domain sa-3037
+   interface Bundle-Ether308.3037
+    split-horizon group
+   !
+   interface Bundle-Ether309.3037
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3037
+   !
+  !
+  bridge-domain sa-3038
+   interface Bundle-Ether308.3038
+    split-horizon group
+   !
+   interface Bundle-Ether309.3038
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3038
+   !
+  !
+  bridge-domain sa-3039
+   interface Bundle-Ether308.3039
+    split-horizon group
+   !
+   interface Bundle-Ether309.3039
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3039
+   !
+  !
+  bridge-domain sa-3040
+   interface Bundle-Ether308.3040
+    split-horizon group
+   !
+   interface Bundle-Ether309.3040
+    split-horizon group
+   !
+   interface HundredGigE0/0/0/23.3040
+   !
+  !
+ !
+!
+mpls oam
+!
+lldp
+ subinterfaces enable
+ management enable
+!
+ssh client source-interface MgmtEth0/RSP1/CPU0/0
+ssh server rate-limit 600
+ssh server session-limit 100
+ssh server v2
+ssh server vrf default
+ssh server netconf vrf default
+telnet vrf default ipv4 server max-servers 100
+end
+
